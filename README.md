@@ -1,5 +1,10 @@
 ![FlueNT10G](logo.svg)
 
+**Note:** This repository contains the code for FlueNT10G's hardware component,
+as well as the FlueNT10G Agent software. The Go software library for
+programmable control over the network tester is located at
+https://github.com/aoeldemann/gofluent10g.
+
 #### What is FlueNT10G?
 
 FlueNT10G is an open-source, free-to-use FPGA-based network tester. FlueNT10G
