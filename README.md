@@ -1,9 +1,13 @@
 ![FlueNT10G](logo.svg)
 
-**Note:** This repository contains the code for FlueNT10G's hardware component,
+**Note 1:** This repository contains the code for FlueNT10G's hardware component,
 as well as the FlueNT10G Agent software. The Go software library for
 programmable control over the network tester is located at
 https://github.com/aoeldemann/gofluent10g.
+
+**Note 2:** The measurement applications and evaluation scripts referenced in
+the *Reproducible Research* section of our FPL 2018 paper titled *FlueNT10G: A Programmable FPGA-based Network Tester for Multi-10-Gigabit Ethernet* are
+available [here](https://github.com/aoeldemann/fluent10g-paper-fpl2018).
 
 #### What is FlueNT10G?
 
