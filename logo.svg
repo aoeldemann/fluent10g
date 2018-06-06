@@ -9,9 +9,9 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="84.666664mm"
-   height="22.173525mm"
-   viewBox="0 0 300 78.567607"
+   width="94.56208mm"
+   height="26.855352mm"
+   viewBox="0 0 335.0625 95.15676"
    id="svg2"
    version="1.1"
    inkscape:version="0.91 r13725"
@@ -26,10 +26,10 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.4"
-     inkscape:cx="144.78919"
-     inkscape:cy="-139.17779"
+     inkscape:cx="275.23762"
+     inkscape:cy="4.055478"
      inkscape:document-units="px"
-     inkscape:current-layer="layer1"
+     inkscape:current-layer="g4146"
      showgrid="true"
      inkscape:snap-bbox="true"
      inkscape:snap-intersection-paths="true"
@@ -47,8 +47,8 @@
     <inkscape:grid
        type="xygrid"
        id="grid4136"
-       originx="-24.9375"
-       originy="-989.93754" />
+       originx="-24.937501"
+       originy="-973.34834" />
   </sodipodi:namedview>
   <metadata
      id="metadata7">
@@ -66,20 +66,20 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(-24.937499,16.142909)">
+     transform="translate(-24.9375,16.142914)">
     <g
        id="g4146"
        transform="matrix(2.6080535,0,0,2.6080535,-40.100835,-100.38227)">
       <rect
-         ry="3.9999993"
-         y="32.362206"
-         x="25"
-         height="30"
-         width="30"
+         ry="4.8445783"
+         y="32.375401"
+         x="25.013197"
+         height="36.334343"
+         width="36.334343"
          id="rect4155"
-         style="fill:#005293;fill-opacity:1;stroke:#000000;stroke-width:0.125;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+         style="fill:#005293;fill-opacity:1;stroke:#000000;stroke-width:0.1513931;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
       <g
-         transform="matrix(0.74905576,0,0,0.74905576,10.03777,7.8852725)"
+         transform="matrix(0.90721498,0,0,0.90721498,6.8917697,2.7302922)"
          id="g4157">
         <path
            style="fill:none;fill-rule:evenodd;stroke:#ffffff;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
@@ -97,48 +97,49 @@
       <text
          sodipodi:linespacing="125%"
          id="text4161"
-         y="57.256004"
-         x="31.560669"
-         style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         y="62.525398"
+         x="32.959118"
+         style="font-style:normal;font-weight:normal;font-size:48.44579315px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          xml:space="preserve"><tspan
-           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:7.5px;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';fill:#ffffff"
-           y="57.256004"
-           x="31.560669"
+           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:9.08358574px;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';fill:#ffffff"
+           y="62.525398"
+           x="32.959118"
            id="tspan4163"
            sodipodi:role="line">10G</tspan></text>
-      <g
-         transform="translate(0,1.3903809)"
-         id="g4173">
-        <text
-           xml:space="preserve"
-           style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-           x="58.527832"
-           y="43.75869"
-           id="text4165"
-           sodipodi:linespacing="125%"><tspan
-             sodipodi:role="line"
-             id="tspan4167"
-             x="58.527832"
-             y="43.75869"
-             style="font-size:15px">FlueNT10G</tspan></text>
-        <text
-           xml:space="preserve"
-           style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-           x="59.509277"
-           y="52.291405"
-           id="text4169"
-           sodipodi:linespacing="125%"><tspan
-             sodipodi:role="line"
-             id="tspan4171"
-             x="59.509277"
-             y="52.291405"
-             style="font-size:5px">FPGA-based Network Tester for</tspan><tspan
-             id="tspan4217"
-             sodipodi:role="line"
-             x="59.509277"
-             y="58.541405"
-             style="font-size:5px">Multi-10-Gigabit Ethernet</tspan></text>
-      </g>
+      <text
+         sodipodi:linespacing="125%"
+         id="text4165"
+         y="44.648579"
+         x="65.166115"
+         style="font-style:normal;font-weight:normal;font-size:48.44579315px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         xml:space="preserve"><tspan
+           style="font-size:16.25352669px"
+           y="44.648579"
+           x="65.166115"
+           id="tspan4167"
+           sodipodi:role="line">FlueNT10G</tspan></text>
+      <text
+         sodipodi:linespacing="125%"
+         id="text4169"
+         y="53.065914"
+         x="66.166969"
+         style="font-style:normal;font-weight:normal;font-size:48.44579315px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         xml:space="preserve"><tspan
+           style="font-size:5.8048315px"
+           y="53.065914"
+           x="66.166969"
+           id="tspan4171"
+           sodipodi:role="line">Programmable FPGA-based</tspan><tspan
+           style="font-size:5.8048315px"
+           y="60.321953"
+           x="66.166969"
+           sodipodi:role="line"
+           id="tspan4217">Network Tester for</tspan><tspan
+           id="tspan4151"
+           style="font-size:5.8048315px"
+           y="67.577995"
+           x="66.166969"
+           sodipodi:role="line">Multi-10-Gigabit Ethernet</tspan></text>
     </g>
   </g>
 </svg>
