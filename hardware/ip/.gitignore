@@ -1,0 +1,15 @@
+component.xml
+fsm_encoding.os
+ip_project/
+out/
+xgui/
+hdl_sim/
+.srcs/
+*/test/*.pyc
+*/test/DVEfiles/
+*/test/inter.vpd
+*/test/lib/
+*/test/results.xml
+*/test/sim_build/
+*/test/ucli.key
+*/test/.restartSimSession.tcl.old

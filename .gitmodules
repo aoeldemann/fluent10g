@@ -1,0 +1,3 @@
+[submodule "hardware/cocotb"]
+	path = hardware/cocotb
+	url = https://github.com/aoeldemann/cocotb.git
