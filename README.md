@@ -72,7 +72,7 @@ paper [here](xxx). BibTeX:
 }
 ```
 
-#### Is there in in-depth documentation?
+#### Is there an in-depth documentation?
 
 We are currently working on this! Please come back soon!
 
