@@ -48,7 +48,7 @@
 #define FLUENT10G_MAX_N_EVT_HANDLERS 32
 #define FLUENT10G_MAX_N_ARGS 16
 #define FLUENT10G_MAX_LEN_ZMQ_MSG_RX 64
-#define FLUENT10G_MAX_LEN_ERR_MSG 128
+#define FLUENT10G_MAX_LEN_ERR_MSG 256
 #define FLUENT10G_MAX_LEN_EVT_HANDLER_NAME 32
 
 #define FLUENT10G_ARG_TYPE_NUMBER 0
@@ -221,7 +221,7 @@ void handle_msg(cJSON *msg) {
   // if no event handler has been found, send an error to the measurement
   // application and print a warning
   if (callback == NULL) {
-    char buf[256];
+    char buf[FLUENT10G_MAX_LEN_ERR_MSG];
     sprintf(buf, "no event handler registered for '%s' event", evt_name);
     warn(buf);
     send_msg(create_msg_nack(buf));
@@ -297,7 +297,7 @@ void fluent10g_register_evt_handler(const char *evt_name,
   // make sure no event handler is registered for this event name yet
   for (uint16_t i = 0; i < n_event_handlers; i++) {
     if (strcmp(event_handlers[i].name, evt_name) == 0) {
-      char msg[256];
+      char msg[FLUENT10G_MAX_LEN_ERR_MSG];
       sprintf(msg, "handler for event '%s' already registered.", evt_name);
       error(msg);
     }
