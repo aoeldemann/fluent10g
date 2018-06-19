@@ -101,7 +101,7 @@ module nt_recv_interpackettime (
           // output inter-packet time in TUSER, if this is the last word of
           // the packet
           if (s_axis_tlast) begin
-            m_axis_tuser <= {cntr_inter_packet_cycles, s_axis_tuser};
+            m_axis_tuser <= {cntr_inter_packet_cycles + 28'b1, s_axis_tuser};
           end else begin
             m_axis_tuser <= 53'b0;
           end
