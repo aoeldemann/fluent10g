@@ -1,0 +1,4 @@
+pcap_import
+pcap_export
+*.pcap
+*.trace
