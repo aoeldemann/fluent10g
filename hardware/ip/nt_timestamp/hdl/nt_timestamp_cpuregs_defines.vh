@@ -33,7 +33,7 @@
 
 `define CPUREG_CTRL_MODE_BITS                 0:0
 `define CPUREG_CTRL_MODE_ADDR                 32'h04
-`define CPUREG_CTRL_MODE_DEFAULT              1'b0
+`define CPUREG_CTRL_MODE_DEFAULT              2'b0
 
 `define CPUREG_CTRL_POS_BITS                  10:0
 `define CPUREG_CTRL_POS_ADDR                  32'h08

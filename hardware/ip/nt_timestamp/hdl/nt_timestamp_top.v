@@ -37,10 +37,9 @@
 // measured.
 //
 // Further software can configure the values of the 'mode_o', 'pos_o' and
-// 'width_o' output signals. If 'mode_o' is asserted, the timestamp values
-// are inserted/extracted to/from IP header fields. If 'mode_o' is deasserted,
-// the timestamps are inserted/extracted from a fixed byte location within the
-// packet data. The byte position (in relation to the start of each packet)
+// 'width_o' output signals. 'mode_o' specifies whether the timestamp shall be
+// inserted in the IP packet header, at a fixed byte location or timestamping
+// is disabaled. The byte position (in relation to the start of each packet)
 // is configured via the 'pos_o' output signal. If 'width_o' is asserted, a
 // 24 bit timestamp is inserted/extracted from the packet data. If the signal
 // is asserted, a 16 bit timestamp is used instead.
@@ -79,7 +78,7 @@ module nt_timestamp_top # (
 
   // timestamp output
   output wire [23:0]   timestamp_o,
-  output wire          mode_o,
+  output wire [1:0]    mode_o,
   output wire [10:0]   pos_o,
   output wire          width_o
 );

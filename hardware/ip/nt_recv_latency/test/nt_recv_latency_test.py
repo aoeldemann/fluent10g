@@ -43,6 +43,11 @@ N_REPEATS = 50
 CLK_FREQ_MHZ = 156.25
 
 
+MODE_DISABLED = 0x0
+MODE_FIXED_POS = 0x1
+MODE_HEADER = 0x2
+
+
 def packet_insert_random_timestamp_header(pkt, timestamps):
     """Insert a random timestamp in the packet header.
 
@@ -171,7 +176,7 @@ def packets_read(dut, axis_reader, pkts_ref, timestamps_ref):
             raise cocotb.result.TestFailure("Packet #%d: invalid TUSER value" %
                                             i)
 
-        if int(dut.mode_i):
+        if int(dut.mode_i) == MODE_HEADER:
             # latency timestamp is saved in IP packet header. latency values
             # must be extracted for all IP packets
             if pkt_ref.type == 0x800 or pkt_ref.type == 0x86dd:
@@ -204,7 +209,7 @@ def packets_read(dut, axis_reader, pkts_ref, timestamps_ref):
                 if tuser[-1] != 0:
                     raise cocotb.result.TestFailure(("Packet #%d: latency " +
                                                      "value on output") % i)
-        else:
+        elif int(dut.mode_i) == MODE_FIXED_POS:
             # latency timestamp is located at a fixed byte position in the
             # packet
 
@@ -274,6 +279,17 @@ def packets_read(dut, axis_reader, pkts_ref, timestamps_ref):
                 raise cocotb.result.TestFailure(("Packet #%d: wrong " +
                                                  "latency value") % i)
 
+        elif int(dut.mode_i) == MODE_DISABLED:
+            # timestamping is disabled
+
+            # all bits of the last tuser value must be set to zero
+            if tuser[-1] != 0:
+                raise cocotb.result.TestFailure(("Packet #%d: latency value "
+                                                 "in output") % i)
+        else:
+            # this should never happen
+            assert False
+
 
 @cocotb.coroutine
 def perform_test(dut, axis_writer, axis_reader, pkts, timestamps):
@@ -339,16 +355,22 @@ def nt_recv_latency_test(dut):
     shuffle(tmp)
     pkts, timestamps = zip(*tmp)
 
-    # we inserted timestamps in packet header, to assert mode_i input signal
-    dut.mode_i <= 1
+    # we inserted timestamps in packet header
+    dut.mode_i <= MODE_HEADER
 
     print("Test Timestamp Header")
+    yield perform_test(dut, axis_writer, axis_reader, pkts, timestamps)
+
+    # perform another test where timestamping is disabled
+    dut.mode_i <= MODE_DISABLED
+
+    print("Test Timestamp Disabled")
     yield perform_test(dut, axis_writer, axis_reader, pkts, timestamps)
 
     # next run some random tests with timestamp inserted at fixed byte position
     for i in range(N_REPEATS):
         # fixed byte position
-        dut.mode_i <= 0
+        dut.mode_i <= MODE_FIXED_POS
 
         # randomly choose 16 bit or 24 bit timestamp width
         width = randint(0, 1)

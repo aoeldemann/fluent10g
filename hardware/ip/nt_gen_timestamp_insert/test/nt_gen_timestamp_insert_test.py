@@ -43,6 +43,10 @@ N_REPEATS = 30
 TIMESTAMP_COUNTER_CYCLES = 3
 CLK_FREQ_MHZ = 156.25
 
+MODE_DISABLED = 0x0
+MODE_FIXED_POS = 0x1
+MODE_HEADER = 0x2
+
 
 def validate_packet_timestamp_header(pkt_ref, pkt_recv, timestamp_ref):
     """Validate packet content and timestamp in packet header.
@@ -190,16 +194,23 @@ def packets_read(dut, axis_reader, pkts_ref, timestamps):
         # convert axi stream data to scapy packet
         pkt = axis_data_to_packet(tdata, tkeep, AXIS_BIT_WIDTH)
 
-        # check and sent and received packets match and if inserted timestamp
-        # is correct. if 'mode_i' is asserted, timestamp is inserted in IPv4
-        # and IPv6 header fields. If 'mode_i' is deasserted, timestamp is
-        # inserted at fixed byte location
-        if int(dut.mode_i) == 1:
+        # check if sent and received packets match and if (possibly) inserted
+        # timestamps match
+        if int(dut.mode_i) == MODE_DISABLED:
+            # timestamping is disabled, received and sent packets must be
+            # identical
+            valid = str(pkt) == str(pkt_ref)
+        elif int(dut.mode_i) == MODE_HEADER:
+            # timestamp is located in packet header
             valid = validate_packet_timestamp_header(pkt_ref, pkt,
                                                      timestamps[i])
-        else:
+        elif int(dut.mode_i) == MODE_FIXED_POS:
+            # timestamp is loacted at fixed byte position
             valid = validate_packet_timestamp_fixed(dut, pkt_ref, pkt,
                                                     timestamps[i])
+        else:
+            # this should never happen
+            assert False
 
         if not valid:
             raise cocotb.result.TestFailure(("Packet #%d: received invalid " +
@@ -220,9 +231,9 @@ def monitor_timestamps(dut, pkts, timestamps):
             # transfer active?
             if int(dut.s_axis_tvalid) == 1 and int(dut.s_axis_tready) == 1:
 
-                if int(dut.mode_i):
-                    # input signal mode_i is asserted -> timestamps are
-                    # inserted in IPv4 checksum or IPv6 flow tabel
+                if int(dut.mode_i) == MODE_HEADER:
+                    # timestamps are inserted in IPv4 checksum or IPv6 flow
+                    # label fields
                     if pkt.type == 0x0800 and axis_word_cntr == 3:
                         # ipv4 packet timestamps are in checksum field in 4th
                         # 8 byte word
@@ -233,16 +244,15 @@ def monitor_timestamps(dut, pkts, timestamps):
                         # 8 byte word
                         timestamps.append(int(dut.timestamp_i))
 
-                else:
-                    # input signal mode_i is not asserted -> timestamps are
-                    # inserted at fixed byte position
+                elif int(dut.mode_i) == MODE_FIXED_POS:
+                    # timestamps are inserted at fixed byte position
 
                     # is the packet long enough to actually insert the
                     # timestamp?
                     if (int(dut.width_i) == 0 and
-                        len(pkt) > int(dut.pos_i)+1) or \
+                            len(pkt) > int(dut.pos_i)+1) or \
                        (int(dut.width_i) == 1 and
-                           len(pkt) > int(dut.pos_i)+2):
+                        len(pkt) > int(dut.pos_i)+2):
 
                         # is this the axi stream data word where the timestamp
                         # will be inserted?
@@ -325,11 +335,16 @@ def nt_gen_timestamp_insert_test(dut):
     for _ in range(N_PACKETS):
         pkts.append(gen_packet())
 
-    # initially we insert timestamps in the packet headers, so assert mode_i
-    # input signal
-    dut.mode_i <= 1
+    # initially we insert timestamps in the packet headers
+    dut.mode_i <= MODE_HEADER
 
     print("Test Timestamp Header")
+    yield perform_test(dut, axis_writer, axis_reader, pkts)
+
+    # then we perform one test where we do not insert any timestamps at all
+    dut.mode_i <= MODE_DISABLED
+
+    print("Test Timestamp Disabled")
     yield perform_test(dut, axis_writer, axis_reader, pkts)
 
     # next run some random tests with timestamp inserted at fixed byte position
@@ -340,7 +355,7 @@ def nt_gen_timestamp_insert_test(dut):
             pkts.append(gen_packet())
 
         # fixed byte position
-        dut.mode_i <= 0
+        dut.mode_i <= MODE_FIXED_POS
 
         # randomly choose 16 bit or 24 bit timestamp width
         width = randint(0, 1)

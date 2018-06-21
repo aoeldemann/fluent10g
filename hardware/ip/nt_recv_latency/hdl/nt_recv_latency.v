@@ -38,23 +38,26 @@
 // calculated and inserted (in this case also bits [23:0] are zero). Whenever
 // TLAST is not asserted, all bits of TUSER are set to zero.
 
-// If the input signal 'mode_i' is asserted, the 16 bit transmission timestamp
-// is extracted from the header of IPv4 or IPv6 packets. For IPv4 packets, the
-// timestamp is located in the checksum header field, for IPv6 packets it is
-// located in the flowlabel header field. For non-IP packets, no timestamp
-// and being extracted and thus no latency is calculated.
+// If the input signal 'mode_i' is set to MODE_HEADER (b10), the 16 bit
+// transmission timestamp is extracted from the header of IPv4 or IPv6 packets.
+// For IPv4 packets, the timestamp is located in the checksum header field, for
+// IPv6 packets it is located in the flowlabel header field. For non-IP
+// packets, no timestamp is being extracted and thus no latency is calculated.
 //
-// If the input signal 'mode_i' is deasserted, the transmission timestamp is
-// extracted from a configurable fixed byte position for each packet. The start
-// byte position (in reloation to the first byte of the packet) is specified by
-// the 'pos_i' intput signal. If 'width_i' is deasserted, a 16 bit timestamp is
-// extracted. A 24 bit timestamp is extracted if 'width_i' is asserted. If the
-// packet size is smaller than pos_i + timestamp width, the packet is too short
-// to contain a timestamp and thus no extraction and latency calculation takes
-// place. Currently, the timestamp may not spread across multiple 8 byte
-// AXI4-Stream data words. This means that for 16 bit timestamps the condition
-// 'pos_i % 8 < 7' must hold true. For 24 bit timestamps the condition
-// 'pos_i % 8 < 6' must be satisfied.
+// If the input signal 'mode_i' is set to MODE_FIXED_POS (b01), the transmission
+// timestamp is extracted from a configurable fixed byte position for each
+// packet. The start byte position (in reloation to the first byte of the
+// packet) is specified by the 'pos_i' input signal. If 'width_i' is
+// deasserted, a 16 bit timestamp is extracted. A 24 bit timestamp is extracted
+// if 'width_i' is asserted. If the packet size is smaller than
+// pos_i + timestamp width, the packet is too short to contain a timestamp and
+// thus no extraction and latency calculation takes place. Currently, the
+// timestamp may not spread across multiple 8 byte AXI4-Stream data words.
+// This means that for 16 bit timestamps the condition 'pos_i % 8 < 7' must hold
+// true. For 24 bit timestamps the condition 'pos_i % 8 < 6' must be satisfied.
+//
+// If the input signal 'mode_i' is set to MODE_DISABLED (b00), timestamp is
+// disabled and thus no timestamp is extracted.
 
 `timescale 1 ns / 1ps
 
@@ -80,13 +83,17 @@ module nt_recv_latency (
   output reg [24:0]    m_axis_tuser,
 
   // timestamp extraction configuration
-  input wire        mode_i,
+  input wire [1:0]  mode_i,
   input wire [10:0] pos_i,
   input wire        width_i,
 
   // current time
   input wire [23:0] timestamp_i
 );
+
+  localparam [1:0] MODE_DISABLED  = 2'b00,
+                   MODE_FIXED_POS = 2'b01,
+                   MODE_HEADER    = 2'b10;
 
   // packet's ethertype
   reg [15:0] ethertype;
@@ -98,12 +105,13 @@ module nt_recv_latency (
   // pass through TREADY from slave to master
   assign s_axis_tready = m_axis_tready;
 
-  // axi stream word in which the timestamp is located (if mode_i is low)
+  // axi stream word in which the timestamp is located (if mode_i is set to
+  // MODE_FIXED_POS)
   wire [7:0] axis_word_select;
   assign axis_word_select = pos_i >> 3; // divide by 8 (axi stream word width)
 
   // byte position in the axi stream word at which the timestamp is located
-  // (if mode_i is low)
+  // (if mode_i is set to MODE_FIXED_POS)
   wire [2:0] axis_word_pos;
   assign axis_word_pos = pos_i - (pos_i & 11'h7F8); // modulo 8
 
@@ -133,7 +141,7 @@ module nt_recv_latency (
   end
 
   // determines whether the extracted timestamp at a fixed byte position (i.e.
-  // mode_i is low) is valid
+  // mode_i set to MODE_FIXED_POS) is valid
   reg timestamp_fixed_pos_valid;
   always @(*) begin
     // is current axi stream word long enough to contain a timestamp?
@@ -188,9 +196,9 @@ module nt_recv_latency (
     end else begin
       if (m_axis_tready) begin
 
-        if (mode_i) begin
-          // if mode_i is high, 16 bit timestamps are inserted into the IPv4
-          // checksum or IPv6 flowlabel fields
+        if (mode_i == MODE_HEADER) begin
+          // 16 bit timestamps are located in the IPv4 checksum or IPv6
+          // flowlabel fields
 
           // slave is ready to receive
           if (axis_word_cntr == 1) begin
@@ -256,9 +264,8 @@ module nt_recv_latency (
               latency_valid <= latency_valid;
             end
           end
-        end else begin
-          // if mode_i is low, timestamps are inserted at a fixed byte
-          // position
+        end else if (mode_i == MODE_FIXED_POS) begin
+          // timestamps are located at a fixed byte position
 
           if (axis_word_cntr == axis_word_select) begin
             // this is the axi stream word in which the timestamp is located
@@ -308,6 +315,11 @@ module nt_recv_latency (
               latency_valid <= latency_valid;
             end
           end
+        end else begin
+          // timestamping is disabled, so there is nothing to extract
+          m_axis_tuser <= 25'b0;
+          latency <= 24'b0;
+          latency_valid <= 1'b0;
         end
 
         // pass through data and control signals
