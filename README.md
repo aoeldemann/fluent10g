@@ -74,7 +74,7 @@ paper available soon. BibTeX:
 }
 ```
 
-### Which Xilinx Vivado version should I use to build the FPGA bitstream?
+#### Which Xilinx Vivado version should I use to build the FPGA bitstream?
 
 We developed FlueNT10G using Xilinx Vivado v2017.2.
 
