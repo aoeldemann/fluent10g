@@ -1,9 +1,8 @@
 ![FlueNT10G](logo.svg)
 
-**Note 1:** This repository contains the code for FlueNT10G's hardware component,
-as well as the FlueNT10G Agent software. The Go software library for
-programmable control over the network tester is located at
-https://github.com/aoeldemann/gofluent10g.
+**Note 1:** This repository contains the code for FlueNT10G's hardware design,
+as well as the PCAP import/export and agent software. The Go software library
+for programmable control over the network tester is located at https://github.com/aoeldemann/gofluent10g.
 
 **Note 2:** The measurement applications and evaluation scripts referenced in
 the *Reproducible Research* section of our FPL 2018 paper titled *FlueNT10G: A Programmable FPGA-based Network Tester for Multi-10-Gigabit Ethernet* are
@@ -35,25 +34,24 @@ it receives. Since the 10G MAC IP cores are operated with a clock frequency of
 156.25 MHz, the timestamping precision of our design is 6.4 nanoseconds.
 However, we found that the 10G MAC IP core on Xilinx Virtex-7 devices
 introduces minor delay variations on the receive-side. In our experiments we
-observed a timestamp precision of 25.6 nanoseconds. We plan to port our design
+observed a timestamp precision of 32 nanoseconds. We plan to port our design
 to an UltraScale FPGA board in the future to achieve even higher accuracy.
 
 #### Is there a maximum trace file size?
 
 Instead of pre-loading trace data to the memory of the FPGA board before replay
 can start, FlueNT10G continuously streams data between host computer and the
-FPGA board during active measurements. Thus, the maximum trace file size is
-only limited by the memory capacity of the host computer. The same applies to
-network capture data.
+FPGA board during active measurements. Thus, the maximum trace and capture file
+size is only limited by the memory capacity of the host computer.
 
 #### What do I need to use FlueNT10G?
 
 FlueNT10G is composed of an FPGA-based hardware component, as well as software
 running on a standard PC. Currently our implementation targets the [NetFPGA-SUME](https://netfpga.org) board. However, if you are familiar with
 FPGA hardware development, the effort to port our design to another board
-should be manageable. To generate the FPGA bitstream, you need a license for
-the Xilinx Vivado tool chain. Additionally, a license for the [Xilinx 10
-Gigabit Ethernet MAC IP core](https://www.xilinx.com/products/intellectual-property/do-di-10gemac.html)
+should be modest. To generate the FPGA bitstream, you need a license for the
+Xilinx Vivado tool chain. Additionally, a license for the [Xilinx 10 Gigabit
+Ethernet MAC IP core](https://www.xilinx.com/products/intellectual-property/do-di-10gemac.html)
 is required. To sum up, you will need:
 
 * NetFPGA-SUME or (with some development effort) another PCIe Gen3 FPGA board
@@ -64,17 +62,21 @@ is required. To sum up, you will need:
 #### Where can I find more information?
 
 FlueNT10G will be presented at the International Conference on Field
-Programmable Logic & Applications 2018 in Dublin, Ireland. You can find our
-paper [here](xxx). BibTeX:
+Programmable Logic & Applications 2018 in Dublin, Ireland. We will make the
+paper available soon. BibTeX:
 
 ```
 @inproceedings{fluent10g-fpl2018,
   author={{Oeldemann, Andreas and Wild, Thomas and Herkersdorf, Andreas}},
   title={{FlueNT10G: A Programmable FPGA-based Network Tester for Multi-10-Gigabit Ethernet}},
-  booktitle={Field Programmable Logic and Applications (FPL), 2018 28th International Conference on},
+  booktitle={Field Programmable Logic and Applications (FPL), 28th International Conference on},
   year={2018}
 }
 ```
+
+### Which Xilinx Vivado should I use to build the FPGA bitstream?
+
+We developed FlueNT10G using Xilinx Vivado v2017.2.
 
 #### Is there an in-depth documentation?
 
