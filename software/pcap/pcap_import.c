@@ -91,15 +91,15 @@ void write_packet(FILE *f_trace, uint32_t ts_diff, struct pcap_pkthdr *pkt_hdr,
   }
 
   // write packet data to file
-  bytes_written = fwrite(pkt_data, 1, pkt_hdr->len, f_trace);
-  if (bytes_written != pkt_hdr->len) {
+  bytes_written = fwrite(pkt_data, 1, pkt_hdr->caplen, f_trace);
+  if (bytes_written != pkt_hdr->caplen) {
     error("could not write packet data");
   }
 
   // packet data must be 8 byte aligned. add padding if necessary
-  if (pkt_hdr->len % 8 != 0) {
+  if (pkt_hdr->caplen % 8 != 0) {
     // calculate number of bytes we need to append
-    uint8_t bytes_padding = 8 * (pkt_hdr->len / 8 + 1) - pkt_hdr->len;
+    uint8_t bytes_padding = 8 * (pkt_hdr->caplen / 8 + 1) - pkt_hdr->caplen;
 
     // add padding
     for (uint8_t i = 0; i < bytes_padding; i++) {
