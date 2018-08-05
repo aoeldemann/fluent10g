@@ -1,3 +1,5 @@
+[![Docs Build Status](https://media.readthedocs.org/static/projects/badges/passing-flat.svg)](https://fluent10g.readthedocs.io/en/latest/)
+
 ![FlueNT10G](logo.svg)
 
 **Note 1:** This repository contains the code for FlueNT10G's hardware design,
