@@ -17,6 +17,11 @@ can precisely replay pre-recorded or synthetically generated network traces,
 capture incoming network traffic and accurately record network latencies on a
 per-packet basis.
 
+#### Where is the documentation located?
+
+The documentation can be found at <https://fluent10g.readthedocs.io>. Although
+it is still in its early stages, we are continuously extending it.
+
 #### What replay/capture throughput does FlueNT10G achieve?
 
 FlueNT10G can concurrently replay and capture network traffic on three 10 Gbps
@@ -79,10 +84,6 @@ paper available soon. BibTeX:
 #### Which Xilinx Vivado version should I use to build the FPGA bitstream?
 
 We developed FlueNT10G using Xilinx Vivado v2017.2.
-
-#### Is there an in-depth documentation?
-
-We are currently working on this! Please come back soon!
 
 #### Who is behind FlueNT10G? How can I get in touch with the team?
 
