@@ -1,4 +1,4 @@
-[![Docs Build Status](https://media.readthedocs.org/static/projects/badges/passing-flat.svg)](https://fluent10g.readthedocs.io/en/latest/)
+[![Documentation Status](https://readthedocs.org/projects/fluent10g/badge/?version=latest)](https://fluent10g.readthedocs.io/en/latest/?badge=latest)
 
 ![FlueNT10G](logo.svg)
 
@@ -68,9 +68,10 @@ is required. To sum up, you will need:
 
 #### Where can I find more information?
 
-FlueNT10G will be presented at the International Conference on Field
-Programmable Logic & Applications 2018 in Dublin, Ireland. We will make the
-paper available soon. BibTeX:
+FlueNT10G was presented at the International Conference on Field
+Programmable Logic & Applications 2018 in Dublin, Ireland. Please use [Google
+Scholar](https://scholar.google.de/scholar?q=fluent10g) to find a digital copy of our
+paper. BibTeX:
 
 ```
 @inproceedings{fluent10g-fpl2018,
@@ -90,5 +91,5 @@ We developed FlueNT10G using Xilinx Vivado v2017.2.
 FlueNT10G is actively being developed by a team of researchers at the [Chair of
 Integrated Systems](https://www.lis.ei.tum.de) at the Technical University of
 Munich. Please contact
-[Andreas Oeldemann](http://www.lis.ei.tum.de/?id=oeldemann) in case of questions,
-feedback, problems and so on.
+[Andreas Oeldemann](http://www.lis.ei.tum.de/en/persons/scientific-staff/oeldemann/)
+in case of questions, feedback, problems and so on.
