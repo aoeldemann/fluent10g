@@ -27,16 +27,20 @@
 #
 # Makefile to build hardware components
 
-.PHONY: all project ip program clean clean-ip
+.PHONY: all ip project synth impl program clean clean-ip
 
 all:
 	@echo "Targets:"
-	@echo " - project"
 	@echo " - ip"
+	@echo " - project"
 	@echo " - synth"
 	@echo " - impl"
 	@echo " - program"
 	@echo " - clean"
+	@echo " - clean-ip"
+
+ip:
+	for ip in ip/nt_*; do make -C $${ip}; done
 
 project:
 	if ! test -f ip/nt_10g_if/component.xml; then\
@@ -70,9 +74,6 @@ project:
 	else \
 		vivado -mode batch -source tcl/fluent10g_create.tcl;\
 	fi;\
-
-ip:
-	for ip in ip/nt_*; do make -C $${ip}; done
 
 synth:
 	if ! test -d project/; then\
