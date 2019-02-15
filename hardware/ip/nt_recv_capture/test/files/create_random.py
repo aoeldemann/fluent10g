@@ -2,7 +2,7 @@
 """Create random input data file."""
 # The MIT License
 #
-# Copyright (c) 2017-2018 by the author(s)
+# Copyright (c) 2017-2019 by the author(s)
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal

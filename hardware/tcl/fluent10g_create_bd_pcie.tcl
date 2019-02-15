@@ -1,6 +1,6 @@
 # The MIT License
 #
-# Copyright (c) 2017-2018 by the author(s)
+# Copyright (c) 2017-2019 by the author(s)
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -83,7 +83,7 @@ proc create_hier_cell_pcie { parentCell coreName } {
     M_AXI_CTRL
 
   # create pcie dma
-  create_bd_cell -type ip -vlnv xilinx.com:ip:xdma:3.1 xdma_0
+  create_bd_cell -type ip -vlnv xilinx.com:ip:xdma:4.1 xdma_0
   set_property -dict [list CONFIG.mode_selection {Advanced} \
                            CONFIG.pcie_blk_locn {X0Y1} \
                            CONFIG.pl_link_cap_max_link_width {X8} \

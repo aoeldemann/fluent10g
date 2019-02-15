@@ -1,7 +1,7 @@
 #!/bin/bash
 # The MIT License
 #
-# Copyright (c) 2017-2018 by the author(s)
+# Copyright (c) 2017-2019 by the author(s)
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -44,7 +44,7 @@ elif [ "$1" == "nt_recv_capture_mem_write" ]; then
   VERILOG_SOURCES="$(pwd)/../hdl_test_toplevels/nt_recv_capture_mem_write_test.v \
     $(pwd)/../hdl/nt_recv_capture_mem_write.v \
     $(pwd)/../hdl_sim/nt_recv_capture_mem_write_fifo.v \
-    $(pwd)/../hdl_sim/fifo_generator_v13_1_rfs.v \
+    $(pwd)/../hdl_sim/fifo_generator_v13_2_rfs.v \
     $(pwd)/../hdl_sim/fifo_generator_vlog_beh.v"
   TOPLEVEL=nt_recv_capture_mem_write_test
   MODULE=nt_recv_capture_mem_write_test
@@ -52,7 +52,7 @@ elif [ "$1" == "nt_recv_capture_mem_write" ]; then
 elif [ "$1" == "nt_recv_capture_mem_write_fifo_wrapper" ]; then
   VERILOG_SOURCES="$(pwd)/../hdl/nt_recv_capture_mem_write_fifo_wrapper.v \
     $(pwd)/../hdl_sim/nt_recv_capture_mem_write_fifo.v \
-    $(pwd)/../hdl_sim/fifo_generator_v13_1_rfs.v \
+    $(pwd)/../hdl_sim/fifo_generator_v13_2_rfs.v \
     $(pwd)/../hdl_sim/fifo_generator_vlog_beh.v"
   TOPLEVEL=nt_recv_capture_mem_write_fifo_wrapper
   MODULE=nt_recv_capture_mem_write_fifo_wrapper_test
@@ -62,7 +62,7 @@ elif [ "$1" == "nt_recv_capture_fifo_merge" ]; then
     $(pwd)/../hdl/nt_recv_capture_fifo_merge.v \
     $(pwd)/../hdl_sim/nt_recv_capture_meta_fifo.v \
     $(pwd)/../hdl_sim/nt_recv_capture_data_fifo.v \
-    $(pwd)/../hdl_sim/fifo_generator_v13_1_rfs.v \
+    $(pwd)/../hdl_sim/fifo_generator_v13_2_rfs.v \
     $(pwd)/../hdl_sim/fifo_generator_vlog_beh.v"
   TOPLEVEL=nt_recv_capture_fifo_merge_test
   MODULE=nt_recv_capture_fifo_merge_test
@@ -73,7 +73,7 @@ elif [ "$1" == "nt_recv_capture_rx_fifo_merge" ]; then
     $(pwd)/../hdl/nt_recv_capture_fifo_merge.v \
     $(pwd)/../hdl_sim/nt_recv_capture_meta_fifo.v \
     $(pwd)/../hdl_sim/nt_recv_capture_data_fifo.v \
-    $(pwd)/../hdl_sim/fifo_generator_v13_1_rfs.v \
+    $(pwd)/../hdl_sim/fifo_generator_v13_2_rfs.v \
     $(pwd)/../hdl_sim/fifo_generator_vlog_beh.v"
   TOPLEVEL=nt_recv_capture_rx_fifo_merge_test
   MODULE=nt_recv_capture_rx_fifo_merge_test
@@ -90,7 +90,7 @@ elif [ "$1" == "nt_recv_capture_top" ]; then
     $(pwd)/../hdl_sim/nt_recv_capture_mem_write_fifo.v \
     $(pwd)/../hdl_sim/nt_recv_capture_meta_fifo.v \
     $(pwd)/../hdl_sim/nt_recv_capture_data_fifo.v \
-    $(pwd)/../hdl_sim/fifo_generator_v13_1_rfs.v \
+    $(pwd)/../hdl_sim/fifo_generator_v13_2_rfs.v \
     $(pwd)/../hdl_sim/fifo_generator_vlog_beh.v"
   TOPLEVEL=nt_recv_capture_top
   MODULE=nt_recv_capture_top_test

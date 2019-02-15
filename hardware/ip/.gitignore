@@ -6,6 +6,7 @@ xgui/
 hdl_sim/
 .srcs/
 */test/*.pyc
+*/test/build/
 */test/DVEfiles/
 */test/inter.vpd
 */test/lib/

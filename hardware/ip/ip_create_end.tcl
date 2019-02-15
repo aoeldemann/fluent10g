@@ -1,6 +1,6 @@
 # The MIT License
 #
-# Copyright (c) 2017-2018 by the author(s)
+# Copyright (c) 2017-2019 by the author(s)
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -33,7 +33,7 @@ update_compile_order -fileset sim_1
 set_property name ${design} [ipx::current_core]
 set_property library {TUMLIS} [ipx::current_core]
 set_property vendor_display_name {TUMLIS-aoeldemann} [ipx::current_core]
-set_property company_url {www.lis.ei.tum.de} [ipx::current_core]
+set_property company_url {https://www.lis.ei.tum.de} [ipx::current_core]
 set_property vendor {TUMLIS} [ipx::current_core]
 set_property supported_families {{virtex7} {Production}} [ipx::current_core]
 set_property version ${ip_version} [ipx::current_core]

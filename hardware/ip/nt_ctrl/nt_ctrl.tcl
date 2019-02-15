@@ -1,6 +1,6 @@
 # The MIT License
 #
-# Copyright (c) 2017-2018 by the author(s)
+# Copyright (c) 2017-2019 by the author(s)
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -38,6 +38,7 @@ read_verilog "./hdl/nt_ctrl_cpuregs_defines.vh"
 
 ipx::package_project
 
+# make sure 'clk156' and 'rstn156' pins are inferred as clock and reset pins
 ipx::infer_bus_interface clk156 xilinx.com:signal:clock_rtl:1.0 \
   [ipx::current_core]
 ipx::infer_bus_interface rstn156 xilinx.com:signal:reset_rtl:1.0 \
@@ -46,13 +47,26 @@ ipx::infer_bus_interface rstn156 xilinx.com:signal:reset_rtl:1.0 \
 ipx::add_bus_parameter FREQ_HZ [ipx::get_bus_interfaces s_axi -of_objects \
   [ipx::current_core]]
 
+# vivado infers 's_axi' interface to be in 'clk' clock domain. however, it is in
+# the 'clk156' domain. remove ASSOCIATED_BUSIF parameter from 'clk' signal
 ipx::remove_bus_parameter ASSOCIATED_BUSIF \
   [ipx::get_bus_interfaces clk -of_objects [ipx::current_core]]
 
+# associate 's_axi' interface with 'clk156' clock
 ipx::add_bus_parameter ASSOCIATED_BUSIF \
   [ipx::get_bus_interfaces clk156 -of_objects [ipx::current_core]]
 set_property value s_axi \
   [ipx::get_bus_parameters ASSOCIATED_BUSIF -of_objects \
+  [ipx::get_bus_interfaces clk156 -of_objects [ipx::current_core]]]
+
+# associate 'rstn' pin with 'clk' clock
+set_property value rstn \
+  [ipx::get_bus_parameters ASSOCIATED_RESET -of_objects \
+  [ipx::get_bus_interfaces clk -of_objects [ipx::current_core]]]
+
+# associate 'rstn156' pin with 'clk156' clock
+set_property value rstn156 \
+  [ipx::get_bus_parameters ASSOCIATED_RESET -of_objects \
   [ipx::get_bus_interfaces clk156 -of_objects [ipx::current_core]]]
 
 source ../ip_create_end.tcl

@@ -1,7 +1,7 @@
 #!/bin/bash
 # The MIT License
 #
-# Copyright (c) 2017-2018 by the author(s)
+# Copyright (c) 2017-2019 by the author(s)
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -34,11 +34,12 @@ VERILOG_SOURCES="$(pwd)/../hdl/nt_gen_rate_ctrl_top.v \
   $(pwd)/../hdl/nt_gen_rate_ctrl.v \
   $(pwd)/../hdl/nt_gen_rate_ctrl_cpuregs.v \
   $(pwd)/../hdl_sim/nt_gen_rate_ctrl_axis_fifo.v \
-  $(pwd)/../hdl_sim/axis_data_fifo_v1_1_vl_rfs.v \
+  $(pwd)/../hdl_sim/axis_data_fifo_v2_0_vl_rfs.v \
   $(pwd)/../hdl_sim/axis_infrastructure_v1_1_vl_rfs.v \
-  $(pwd)/../hdl_sim/fifo_generator_v13_1_rfs.v \
-  $(pwd)/../hdl_sim/fifo_generator_vlog_beh.v \
-  $(pwd)/../hdl_sim/xpm_cdc.sv"
+  $(pwd)/../hdl_sim/glbl.v \
+  $(pwd)/../hdl_sim/xpm_cdc.sv \
+  $(pwd)/../hdl_sim/xpm_fifo.sv \
+  $(pwd)/../hdl_sim/xpm_memory.sv"
 TOPLEVEL=nt_gen_rate_ctrl_top
 MODULE=nt_gen_rate_ctrl_top_test
 OPTS="COMPILE_ARGS=+incdir+$(pwd)/../hdl_sim+incdir+$(pwd)/../hdl"

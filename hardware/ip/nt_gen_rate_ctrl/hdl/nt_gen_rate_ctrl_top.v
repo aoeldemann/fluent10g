@@ -1,6 +1,6 @@
 // The MIT License
 //
-// Copyright (c) 2017-2018 by the author(s)
+// Copyright (c) 2017-2019 by the author(s)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -150,10 +150,7 @@ module nt_gen_rate_ctrl_top # (
     .m_axis_tdata(axis_fifo_tdata),
     .m_axis_tkeep(axis_fifo_tkeep),
     .m_axis_tlast(axis_fifo_tlast),
-    .m_axis_tuser(axis_fifo_tuser),
-    .axis_data_count(),
-    .axis_wr_data_count(),
-    .axis_rd_data_count()
+    .m_axis_tuser(axis_fifo_tuser)
   );
 
 endmodule

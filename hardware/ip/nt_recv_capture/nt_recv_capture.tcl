@@ -1,6 +1,6 @@
 # The MIT License
 #
-# Copyright (c) 2017-2018 by the author(s)
+# Copyright (c) 2017-2019 by the author(s)
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -41,7 +41,7 @@ read_verilog "./hdl/nt_recv_capture_mem_write_fifo_wrapper.v"
 read_verilog "./hdl/nt_recv_capture_rx.v"
 read_verilog "./hdl/nt_recv_capture_fifo_merge.v"
 
-create_ip -name fifo_generator -vendor xilinx.com -library ip -version 13.1 \
+create_ip -name fifo_generator -vendor xilinx.com -library ip -version 13.2 \
   -module_name nt_recv_capture_mem_write_fifo
 set_property -dict [list \
                     CONFIG.Performance_Options {First_Word_Fall_Through} \
@@ -59,7 +59,7 @@ set_property -dict [list \
                     CONFIG.Empty_Threshold_Negate_Value {256}] \
   [get_ips nt_recv_capture_mem_write_fifo]
 
-create_ip -name fifo_generator -vendor xilinx.com -library ip -version 13.1 \
+create_ip -name fifo_generator -vendor xilinx.com -library ip -version 13.2 \
   -module_name nt_recv_capture_meta_fifo
 set_property -dict [list \
                     CONFIG.Performance_Options {First_Word_Fall_Through} \
@@ -67,7 +67,7 @@ set_property -dict [list \
                     CONFIG.Output_Data_Width {75} CONFIG.Output_Depth {256} ] \
   [get_ips nt_recv_capture_meta_fifo]
 
-create_ip -name fifo_generator -vendor xilinx.com -library ip -version 13.1 \
+create_ip -name fifo_generator -vendor xilinx.com -library ip -version 13.2 \
   -module_name nt_recv_capture_data_fifo
 set_property -dict [list \
                     CONFIG.Performance_Options {First_Word_Fall_Through} \
@@ -96,8 +96,8 @@ if {${sim_src_exist} == 0} {
   ${curdir}/${proj_dir}/${design}.srcs/sources_1/ip/nt_recv_capture_meta_fifo/sim/nt_recv_capture_meta_fifo.v
   file link -symbolic hdl_sim/nt_recv_capture_data_fifo.v \
   ${curdir}/${proj_dir}/${design}.srcs/sources_1/ip/nt_recv_capture_data_fifo/sim/nt_recv_capture_data_fifo.v
-  file link -symbolic hdl_sim/fifo_generator_v13_1_rfs.v \
-  ${curdir}/${proj_dir}/${design}.srcs/sources_1/ip/nt_recv_capture_mem_write_fifo/hdl/fifo_generator_v13_1_rfs.v
+  file link -symbolic hdl_sim/fifo_generator_v13_2_rfs.v \
+  ${curdir}/${proj_dir}/${design}.srcs/sources_1/ip/nt_recv_capture_mem_write_fifo/hdl/fifo_generator_v13_2_rfs.v
   file link -symbolic hdl_sim/fifo_generator_vlog_beh.v \
   ${curdir}/${proj_dir}/${design}.srcs/sources_1/ip/nt_recv_capture_mem_write_fifo/simulation/fifo_generator_vlog_beh.v
 }

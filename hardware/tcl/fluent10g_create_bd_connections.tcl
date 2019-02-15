@@ -1,6 +1,6 @@
 # The MIT License
 #
-# Copyright (c) 2017-2018 by the author(s)
+# Copyright (c) 2017-2019 by the author(s)
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -399,14 +399,6 @@ connect_bd_net [get_bd_pins axis_fifo_tx_2/s_axis_aresetn] \
   [get_bd_pins rstn_combined/Res]
 connect_bd_net [get_bd_pins axis_fifo_tx_3/s_axis_aresetn] \
   [get_bd_pins rstn_combined/Res]
-connect_bd_net [get_bd_pins axis_fifo_tx_0/m_axis_aresetn] \
-  [get_bd_pins rstn156_combined/Res]
-connect_bd_net [get_bd_pins axis_fifo_tx_1/m_axis_aresetn] \
-  [get_bd_pins rstn156_combined/Res]
-connect_bd_net [get_bd_pins axis_fifo_tx_2/m_axis_aresetn] \
-  [get_bd_pins rstn156_combined/Res]
-connect_bd_net [get_bd_pins axis_fifo_tx_3/m_axis_aresetn] \
-  [get_bd_pins rstn156_combined/Res]
 
 # connect axis_fifo_rx clk and rst
 connect_bd_net [get_bd_pins axis_fifo_rx_0/s_axis_aclk] \
@@ -433,14 +425,6 @@ connect_bd_net [get_bd_pins axis_fifo_rx_2/s_axis_aresetn] \
   [get_bd_pins rstn156_combined/Res]
 connect_bd_net [get_bd_pins axis_fifo_rx_3/s_axis_aresetn] \
   [get_bd_pins rstn156_combined/Res]
-connect_bd_net [get_bd_pins axis_fifo_rx_0/m_axis_aresetn] \
-  [get_bd_pins rstn_combined/Res]
-connect_bd_net [get_bd_pins axis_fifo_rx_1/m_axis_aresetn] \
-  [get_bd_pins rstn_combined/Res]
-connect_bd_net [get_bd_pins axis_fifo_rx_2/m_axis_aresetn] \
-  [get_bd_pins rstn_combined/Res]
-connect_bd_net [get_bd_pins axis_fifo_rx_3/m_axis_aresetn] \
-  [get_bd_pins rstn_combined/Res]
 
 # connect nt_timestamp to nt_gen_timestamp_insert
 connect_bd_net [get_bd_pins nt_timestamp/timestamp_o] \

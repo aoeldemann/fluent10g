@@ -1,6 +1,6 @@
 # The MIT License
 #
-# Copyright (c) 2017-2018 by the author(s)
+# Copyright (c) 2017-2019 by the author(s)
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -37,7 +37,7 @@ read_verilog "./hdl/nt_gen_rate_ctrl.v"
 read_verilog "./hdl/nt_gen_rate_ctrl_cpuregs.v"
 read_verilog "./hdl/nt_gen_rate_ctrl_cpuregs_defines.vh"
 
-create_ip -name axis_data_fifo -vendor xilinx.com -library ip -version 1.1 \
+create_ip -name axis_data_fifo -vendor xilinx.com -library ip -version 2.0 \
   -module_name nt_gen_rate_ctrl_axis_fifo
 set_property -dict [list  CONFIG.TDATA_NUM_BYTES {8} CONFIG.FIFO_DEPTH {512} \
                           CONFIG.HAS_TKEEP {1} CONFIG.HAS_TLAST {1} \
@@ -59,18 +59,20 @@ if {${sim_src_exist} == 0} {
   set curdir [pwd]
   file link -symbolic hdl_sim/nt_gen_rate_ctrl_axis_fifo.v \
   ${curdir}/${proj_dir}/${design}.srcs/sources_1/ip/nt_gen_rate_ctrl_axis_fifo/sim/nt_gen_rate_ctrl_axis_fifo.v
-  file link -symbolic hdl_sim/axis_data_fifo_v1_1_vl_rfs.v \
-  ${curdir}/${proj_dir}/${design}.srcs/sources_1/ip/nt_gen_rate_ctrl_axis_fifo/hdl/axis_data_fifo_v1_1_vl_rfs.v
-  file link -symbolic hdl_sim/fifo_generator_v13_1_rfs.v \
-  ${curdir}/${proj_dir}/${design}.srcs/sources_1/ip/nt_gen_rate_ctrl_axis_fifo/hdl/fifo_generator_v13_1_rfs.v
-  file link -symbolic hdl_sim/fifo_generator_vlog_beh.v \
-  ${curdir}/${proj_dir}/${design}.srcs/sources_1/ip/nt_gen_rate_ctrl_axis_fifo/simulation/fifo_generator_vlog_beh.v
+  file link -symbolic hdl_sim/axis_data_fifo_v2_0_vl_rfs.v \
+  ${curdir}/${proj_dir}/${design}.srcs/sources_1/ip/nt_gen_rate_ctrl_axis_fifo/hdl/axis_data_fifo_v2_0_vl_rfs.v
   file link -symbolic hdl_sim/axis_infrastructure_v1_1_vl_rfs.v \
   ${curdir}/${proj_dir}/${design}.srcs/sources_1/ip/nt_gen_rate_ctrl_axis_fifo/hdl/axis_infrastructure_v1_1_vl_rfs.v
   file link -symbolic hdl_sim/axis_infrastructure_v1_1_0.vh \
   ${curdir}/${proj_dir}/${design}.srcs/sources_1/ip/nt_gen_rate_ctrl_axis_fifo/hdl/axis_infrastructure_v1_1_0.vh
+  file link -symbolic hdl_sim/glbl.v \
+  $::env(XILINX_VIVADO)/data/verilog/src/glbl.v
   file link -symbolic hdl_sim/xpm_cdc.sv \
   $::env(XILINX_VIVADO)/data/ip/xpm/xpm_cdc/hdl/xpm_cdc.sv
+  file link -symbolic hdl_sim/xpm_fifo.sv \
+  $::env(XILINX_VIVADO)/data/ip/xpm/xpm_fifo/hdl/xpm_fifo.sv
+  file link -symbolic hdl_sim/xpm_memory.sv \
+  $::env(XILINX_VIVADO)/data/ip/xpm/xpm_memory/hdl/xpm_memory.sv
 }
 
 ipx::package_project -force -import_files nt_gen_rate_ctrl_axis_fifo.xci

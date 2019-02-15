@@ -1,6 +1,6 @@
 # The MIT License
 #
-# Copyright (c) 2017-2018 by the author(s)
+# Copyright (c) 2017-2019 by the author(s)
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -59,7 +59,7 @@ import_files -fileset constrs_1 ./xdc/fluent10g_bd.xdc
 source ./tcl/fluent10g_create_ip.tcl
 
 # create clock generator
-create_bd_cell -type ip -vlnv xilinx.com:ip:clk_wiz:5.4 clk_wiz_0
+create_bd_cell -type ip -vlnv xilinx.com:ip:clk_wiz:6.0 clk_wiz_0
 set_property -dict [list CONFIG.CLKOUT1_REQUESTED_OUT_FREQ {200.000}] \
   [get_bd_cells clk_wiz_0]
 
@@ -200,47 +200,47 @@ create_bd_cell -type ip -vlnv TUMLIS:TUMLIS:nt_packet_counter:1.00 \
   nt_packet_counter_3
 
 # create AXI4-Stream FIFOs for TX clock domain crossing
-create_bd_cell -type ip -vlnv xilinx.com:ip:axis_data_fifo:1.1 axis_fifo_tx_0
+create_bd_cell -type ip -vlnv xilinx.com:ip:axis_data_fifo:2.0 axis_fifo_tx_0
 set_property -dict [list CONFIG.TDATA_NUM_BYTES {8} CONFIG.IS_ACLK_ASYNC {1} \
   CONFIG.HAS_TKEEP {1} CONFIG.HAS_TLAST {1} CONFIG.TUSER_WIDTH {32} \
   CONFIG.FIFO_DEPTH {16}]  [get_bd_cells axis_fifo_tx_0]
-create_bd_cell -type ip -vlnv xilinx.com:ip:axis_data_fifo:1.1 axis_fifo_tx_1
+create_bd_cell -type ip -vlnv xilinx.com:ip:axis_data_fifo:2.0 axis_fifo_tx_1
 set_property -dict [list CONFIG.TDATA_NUM_BYTES {8} CONFIG.IS_ACLK_ASYNC {1} \
   CONFIG.HAS_TKEEP {1} CONFIG.HAS_TLAST {1} CONFIG.TUSER_WIDTH {32} \
   CONFIG.FIFO_DEPTH {16}] [get_bd_cells axis_fifo_tx_1]
-create_bd_cell -type ip -vlnv xilinx.com:ip:axis_data_fifo:1.1 axis_fifo_tx_2
+create_bd_cell -type ip -vlnv xilinx.com:ip:axis_data_fifo:2.0 axis_fifo_tx_2
 set_property -dict [list CONFIG.TDATA_NUM_BYTES {8} CONFIG.IS_ACLK_ASYNC {1} \
   CONFIG.HAS_TKEEP {1} CONFIG.HAS_TLAST {1} CONFIG.TUSER_WIDTH {32} \
   CONFIG.FIFO_DEPTH {16}] [get_bd_cells axis_fifo_tx_2]
-create_bd_cell -type ip -vlnv xilinx.com:ip:axis_data_fifo:1.1 axis_fifo_tx_3
+create_bd_cell -type ip -vlnv xilinx.com:ip:axis_data_fifo:2.0 axis_fifo_tx_3
 set_property -dict [list CONFIG.TDATA_NUM_BYTES {8} CONFIG.IS_ACLK_ASYNC {1} \
   CONFIG.HAS_TKEEP {1} CONFIG.HAS_TLAST {1} CONFIG.TUSER_WIDTH {32} \
   CONFIG.FIFO_DEPTH {16}] [get_bd_cells axis_fifo_tx_3]
 
 # create AXI4-Stream FIFOs for RX clock domain crossing
-create_bd_cell -type ip -vlnv xilinx.com:ip:axis_data_fifo:1.1 axis_fifo_rx_0
+create_bd_cell -type ip -vlnv xilinx.com:ip:axis_data_fifo:2.0 axis_fifo_rx_0
 set_property -dict [list CONFIG.TDATA_NUM_BYTES {8} CONFIG.IS_ACLK_ASYNC {1} \
   CONFIG.HAS_TKEEP {1} CONFIG.HAS_TLAST {1} CONFIG.TUSER_WIDTH {53} \
   CONFIG.FIFO_DEPTH {16}] [get_bd_cells axis_fifo_rx_0]
-create_bd_cell -type ip -vlnv xilinx.com:ip:axis_data_fifo:1.1 axis_fifo_rx_1
+create_bd_cell -type ip -vlnv xilinx.com:ip:axis_data_fifo:2.0 axis_fifo_rx_1
 set_property -dict [list CONFIG.TDATA_NUM_BYTES {8} CONFIG.IS_ACLK_ASYNC {1} \
   CONFIG.HAS_TKEEP {1} CONFIG.HAS_TLAST {1} CONFIG.TUSER_WIDTH {53} \
   CONFIG.FIFO_DEPTH {16}] [get_bd_cells axis_fifo_rx_1]
-create_bd_cell -type ip -vlnv xilinx.com:ip:axis_data_fifo:1.1 axis_fifo_rx_2
+create_bd_cell -type ip -vlnv xilinx.com:ip:axis_data_fifo:2.0 axis_fifo_rx_2
 set_property -dict [list CONFIG.TDATA_NUM_BYTES {8} CONFIG.IS_ACLK_ASYNC {1} \
   CONFIG.HAS_TKEEP {1} CONFIG.HAS_TLAST {1} CONFIG.TUSER_WIDTH {53} \
   CONFIG.FIFO_DEPTH {16}] [get_bd_cells axis_fifo_rx_2]
-create_bd_cell -type ip -vlnv xilinx.com:ip:axis_data_fifo:1.1 axis_fifo_rx_3
+create_bd_cell -type ip -vlnv xilinx.com:ip:axis_data_fifo:2.0 axis_fifo_rx_3
 set_property -dict [list CONFIG.TDATA_NUM_BYTES {8} CONFIG.IS_ACLK_ASYNC {1} \
   CONFIG.HAS_TKEEP {1} CONFIG.HAS_TLAST {1} CONFIG.TUSER_WIDTH {53} \
   CONFIG.FIFO_DEPTH {16}] [get_bd_cells axis_fifo_rx_3]
 
 # create MIGs for DDD3 DRAM memories
-create_bd_cell -type ip -vlnv xilinx.com:ip:mig_7series:4.0 mig_ddr3A
+create_bd_cell -type ip -vlnv xilinx.com:ip:mig_7series:4.2 mig_ddr3A
 set_property -dict [list \
                     CONFIG.XML_INPUT_FILE ${current_dir}/config/mig_ddr3A.xml] \
   [get_bd_cells mig_ddr3A]
-create_bd_cell -type ip -vlnv xilinx.com:ip:mig_7series:4.0 mig_ddr3B
+create_bd_cell -type ip -vlnv xilinx.com:ip:mig_7series:4.2 mig_ddr3B
 set_property -dict [list \
                     CONFIG.XML_INPUT_FILE ${current_dir}/config/mig_ddr3B.xml] \
   [get_bd_cells mig_ddr3B]

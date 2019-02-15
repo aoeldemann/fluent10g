@@ -1,6 +1,6 @@
 # The MIT License
 #
-# Copyright (c) 2017-2018 by the author(s)
+# Copyright (c) 2017-2019 by the author(s)
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -38,7 +38,7 @@ read_verilog "./hdl/nt_gen_replay_cpuregs_defines.vh"
 read_verilog "./hdl/nt_gen_replay_mem_read.v"
 read_verilog "./hdl/nt_gen_replay_assemble.v"
 
-create_ip -name fifo_generator -vendor xilinx.com -library ip -version 13.1 \
+create_ip -name fifo_generator -vendor xilinx.com -library ip -version 13.2 \
   -module_name nt_gen_replay_mem_read_fifo
 set_property -dict [list \
                     CONFIG.Performance_Options {First_Word_Fall_Through} \
@@ -71,8 +71,8 @@ if {${sim_src_exist} == 0} {
   set curdir [pwd]
   file link -symbolic hdl_sim/nt_gen_replay_mem_read_fifo.v \
   ${curdir}/${proj_dir}/${design}.srcs/sources_1/ip/nt_gen_replay_mem_read_fifo/sim/nt_gen_replay_mem_read_fifo.v
-  file link -symbolic hdl_sim/fifo_generator_v13_1_rfs.v \
-  ${curdir}/${proj_dir}/${design}.srcs/sources_1/ip/nt_gen_replay_mem_read_fifo/hdl/fifo_generator_v13_1_rfs.v
+  file link -symbolic hdl_sim/fifo_generator_v13_2_rfs.v \
+  ${curdir}/${proj_dir}/${design}.srcs/sources_1/ip/nt_gen_replay_mem_read_fifo/hdl/fifo_generator_v13_2_rfs.v
   file link -symbolic hdl_sim/fifo_generator_vlog_beh.v \
   ${curdir}/${proj_dir}/${design}.srcs/sources_1/ip/nt_gen_replay_mem_read_fifo/simulation/fifo_generator_vlog_beh.v
 }

@@ -1,7 +1,7 @@
 #!/bin/bash
 # The MIT License
 #
-# Copyright (c) 2017-2018 by the author(s)
+# Copyright (c) 2017-2019 by the author(s)
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -46,7 +46,7 @@ elif [ "$1" == "nt_gen_replay_top" ]; then
     $(pwd)/../hdl/nt_gen_replay_mem_read.v \
     $(pwd)/../hdl/nt_gen_replay_assemble.v \
     $(pwd)/../hdl_sim/nt_gen_replay_mem_read_fifo.v \
-    $(pwd)/../hdl_sim/fifo_generator_v13_1_rfs.v \
+    $(pwd)/../hdl_sim/fifo_generator_v13_2_rfs.v \
     $(pwd)/../hdl_sim/fifo_generator_vlog_beh.v"
   TOPLEVEL=nt_gen_replay_top
   MODULE=nt_gen_replay_top_test
