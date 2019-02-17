@@ -20,7 +20,7 @@
 # -- Project information -----------------------------------------------------
 
 project = 'FlueNT10G'
-copyright = '2018, Andreas Oeldemann'
+copyright = '2019, Andreas Oeldemann'
 author = 'Andreas Oeldemann'
 
 # The short X.Y version
