@@ -49,6 +49,8 @@ project:
 		echo "ERROR: please create nt_10g_if_shared ip core first";\
 	elif ! test -f ip/nt_ctrl/component.xml; then\
 		echo "ERROR: please create nt_ctrl ip core first";\
+	elif ! test -f ip/nt_datarate/component.xml; then\
+		echo "ERROR: please create nt_datarate ip core first";\
 	elif ! test -f ip/nt_gen_rate_ctrl/component.xml; then\
 		echo "ERROR: please create nt_gen_rate_ctrl ip core first";\
 	elif ! test -f ip/nt_gen_replay/component.xml; then\
