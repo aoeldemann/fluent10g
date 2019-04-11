@@ -181,6 +181,19 @@ create_bd_addr_seg -offset 0x00016000 -range 4K \
   [get_bd_addr_spaces pcie_0/xdma_0/M_AXI_LITE] \
   [get_bd_addr_segs /nt_ident_0/s_axi/reg0] SEG_nt_ident_0_reg0
 
+create_bd_addr_seg -offset 0x00017000 -range 4K \
+  [get_bd_addr_spaces pcie_0/xdma_0/M_AXI_LITE] \
+  [get_bd_addr_segs /nt_datarate_0/s_axi/reg0] SEG_nt_datarate_0_reg0
+create_bd_addr_seg -offset 0x00018000 -range 4K \
+  [get_bd_addr_spaces pcie_0/xdma_0/M_AXI_LITE] \
+  [get_bd_addr_segs /nt_datarate_1/s_axi/reg0] SEG_nt_datarate_1_reg0
+create_bd_addr_seg -offset 0x00019000 -range 4K \
+  [get_bd_addr_spaces pcie_0/xdma_0/M_AXI_LITE] \
+  [get_bd_addr_segs /nt_datarate_2/s_axi/reg0] SEG_nt_datarate_2_reg0
+create_bd_addr_seg -offset 0x0001A000 -range 4K \
+  [get_bd_addr_spaces pcie_0/xdma_0/M_AXI_LITE] \
+  [get_bd_addr_segs /nt_datarate_3/s_axi/reg0] SEG_nt_datarate_3_reg0
+
 
 set_property -dict [list CONFIG.C_AXI_BASE_ADDRESS {0x00000000}] \
   [get_bd_cells nt_gen_replay_0]
@@ -228,3 +241,11 @@ set_property -dict [list CONFIG.C_AXI_BASE_ADDRESS {0x00015000}] \
   [get_bd_cells nt_timestamp]
 set_property -dict [list CONFIG.C_AXI_BASE_ADDRESS {0x00016000}] \
   [get_bd_cells nt_ident_0]
+set_property -dict [list CONFIG.C_AXI_BASE_ADDRESS {0x00017000}] \
+  [get_bd_cells nt_datarate_0]
+set_property -dict [list CONFIG.C_AXI_BASE_ADDRESS {0x00018000}] \
+  [get_bd_cells nt_datarate_1]
+set_property -dict [list CONFIG.C_AXI_BASE_ADDRESS {0x00019000}] \
+  [get_bd_cells nt_datarate_2]
+set_property -dict [list CONFIG.C_AXI_BASE_ADDRESS {0x0001A000}] \
+  [get_bd_cells nt_datarate_3]

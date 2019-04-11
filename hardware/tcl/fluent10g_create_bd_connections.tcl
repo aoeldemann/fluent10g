@@ -270,6 +270,32 @@ connect_bd_net [get_bd_pins nt_recv_interpackettime_2/rst_sw156] \
 connect_bd_net [get_bd_pins nt_recv_interpackettime_3/rst_sw156] \
   [get_bd_pins nt_ctrl/rst_sw156]
 
+# connect nt_datarate clk and rst
+connect_bd_net [get_bd_pins nt_datarate_0/clk156] \
+  [get_bd_pins if_0/clk156_out]
+connect_bd_net [get_bd_pins nt_datarate_1/clk156] \
+  [get_bd_pins if_0/clk156_out]
+connect_bd_net [get_bd_pins nt_datarate_2/clk156] \
+  [get_bd_pins if_0/clk156_out]
+connect_bd_net [get_bd_pins nt_datarate_3/clk156] \
+  [get_bd_pins if_0/clk156_out]
+connect_bd_net [get_bd_pins nt_datarate_0/rstn156] \
+  [get_bd_pins inverter_clk156_rst/Res]
+connect_bd_net [get_bd_pins nt_datarate_1/rstn156] \
+  [get_bd_pins inverter_clk156_rst/Res]
+connect_bd_net [get_bd_pins nt_datarate_2/rstn156] \
+  [get_bd_pins inverter_clk156_rst/Res]
+connect_bd_net [get_bd_pins nt_datarate_3/rstn156] \
+  [get_bd_pins inverter_clk156_rst/Res]
+connect_bd_net [get_bd_pins nt_datarate_0/rst_sw156] \
+  [get_bd_pins nt_ctrl/rst_sw156]
+connect_bd_net [get_bd_pins nt_datarate_1/rst_sw156] \
+  [get_bd_pins nt_ctrl/rst_sw156]
+connect_bd_net [get_bd_pins nt_datarate_2/rst_sw156] \
+  [get_bd_pins nt_ctrl/rst_sw156]
+connect_bd_net [get_bd_pins nt_datarate_3/rst_sw156] \
+  [get_bd_pins nt_ctrl/rst_sw156]
+
 # connect nt_packet_counter clk and rst
 connect_bd_net [get_bd_pins nt_packet_counter_0/clk] \
   [get_bd_pins clk_wiz_0/clk_out1]
@@ -524,14 +550,24 @@ connect_bd_intf_net [get_bd_intf_pins nt_gen_rate_ctrl_2/s_axis] \
 connect_bd_intf_net [get_bd_intf_pins nt_gen_rate_ctrl_3/s_axis] \
   [get_bd_intf_pins axis_fifo_tx_3/m_axis]
 
-# connect nt_gen_rate_ctrl to nt_gen_timestamp_insert
+# connect nt_gen_rate_ctrl to nt_datarate (tx)
 connect_bd_intf_net [get_bd_intf_pins nt_gen_rate_ctrl_0/m_axis] \
-  [get_bd_intf_pins nt_gen_timestamp_insert_0/s_axis]
+  [get_bd_intf_pins nt_datarate_0/s_axis_tx]
 connect_bd_intf_net [get_bd_intf_pins nt_gen_rate_ctrl_1/m_axis] \
-  [get_bd_intf_pins nt_gen_timestamp_insert_1/s_axis]
+  [get_bd_intf_pins nt_datarate_1/s_axis_tx]
 connect_bd_intf_net [get_bd_intf_pins nt_gen_rate_ctrl_2/m_axis] \
-  [get_bd_intf_pins nt_gen_timestamp_insert_2/s_axis]
+  [get_bd_intf_pins nt_datarate_2/s_axis_tx]
 connect_bd_intf_net [get_bd_intf_pins nt_gen_rate_ctrl_3/m_axis] \
+  [get_bd_intf_pins nt_datarate_3/s_axis_tx]
+
+# connect nt_datarate (tx) to nt_gen_timestamp_insert
+connect_bd_intf_net [get_bd_intf_pins nt_datarate_0/m_axis_tx] \
+  [get_bd_intf_pins nt_gen_timestamp_insert_0/s_axis]
+connect_bd_intf_net [get_bd_intf_pins nt_datarate_1/m_axis_tx] \
+  [get_bd_intf_pins nt_gen_timestamp_insert_1/s_axis]
+connect_bd_intf_net [get_bd_intf_pins nt_datarate_2/m_axis_tx] \
+  [get_bd_intf_pins nt_gen_timestamp_insert_2/s_axis]
+connect_bd_intf_net [get_bd_intf_pins nt_datarate_3/m_axis_tx] \
   [get_bd_intf_pins nt_gen_timestamp_insert_3/s_axis]
 
 # connect nt_gen_timestamp_insert to network interfaces
@@ -594,14 +630,24 @@ connect_bd_intf_net [get_bd_intf_pins nt_recv_latency_2/m_axis] \
 connect_bd_intf_net [get_bd_intf_pins nt_recv_latency_3/m_axis] \
   [get_bd_intf_pins nt_recv_interpackettime_3/s_axis]
 
-# connect nt_recv_interpackettime to axis_fifo_rx
+# connect nt_recv_interpackettime nt_datarate (rx)
 connect_bd_intf_net [get_bd_intf_pins nt_recv_interpackettime_0/m_axis] \
-  [get_bd_intf_pins axis_fifo_rx_0/s_axis]
+  [get_bd_intf_pins nt_datarate_0/s_axis_rx]
 connect_bd_intf_net [get_bd_intf_pins nt_recv_interpackettime_1/m_axis] \
-  [get_bd_intf_pins axis_fifo_rx_1/s_axis]
+  [get_bd_intf_pins nt_datarate_1/s_axis_rx]
 connect_bd_intf_net [get_bd_intf_pins nt_recv_interpackettime_2/m_axis] \
-  [get_bd_intf_pins axis_fifo_rx_2/s_axis]
+  [get_bd_intf_pins nt_datarate_2/s_axis_rx]
 connect_bd_intf_net [get_bd_intf_pins nt_recv_interpackettime_3/m_axis] \
+  [get_bd_intf_pins nt_datarate_3/s_axis_rx]
+
+# connect nt_datarate (rx) to axis_fifo_rx
+connect_bd_intf_net [get_bd_intf_pins nt_datarate_0/m_axis_rx] \
+  [get_bd_intf_pins axis_fifo_rx_0/s_axis]
+connect_bd_intf_net [get_bd_intf_pins nt_datarate_1/m_axis_rx] \
+  [get_bd_intf_pins axis_fifo_rx_1/s_axis]
+connect_bd_intf_net [get_bd_intf_pins nt_datarate_2/m_axis_rx] \
+  [get_bd_intf_pins axis_fifo_rx_2/s_axis]
+connect_bd_intf_net [get_bd_intf_pins nt_datarate_3/m_axis_rx] \
   [get_bd_intf_pins axis_fifo_rx_3/s_axis]
 
 # connect axis_fifo_rx to nt_packet_counter
@@ -900,6 +946,36 @@ connect_bd_net [get_bd_pins axi_interconnect_1/M22_ARESETN] \
 connect_bd_intf_net -boundary_type upper \
   [get_bd_intf_pins nt_gen_rate_ctrl_3/s_axi_ctrl] \
   [get_bd_intf_pins axi_interconnect_1/M22_AXI]
+
+# nt_datarate (slaves)
+connect_bd_net [get_bd_pins axi_interconnect_1/M23_ACLK] \
+  [get_bd_pins if_0/clk156_out]
+connect_bd_net [get_bd_pins axi_interconnect_1/M23_ARESETN] \
+  [get_bd_pins inverter_clk156_rst/Res]
+connect_bd_intf_net -boundary_type upper \
+  [get_bd_intf_pins nt_datarate_0/s_axi] \
+  [get_bd_intf_pins axi_interconnect_1/M23_AXI]
+connect_bd_net [get_bd_pins axi_interconnect_1/M24_ACLK] \
+  [get_bd_pins if_0/clk156_out]
+connect_bd_net [get_bd_pins axi_interconnect_1/M24_ARESETN] \
+  [get_bd_pins inverter_clk156_rst/Res]
+connect_bd_intf_net -boundary_type upper \
+  [get_bd_intf_pins nt_datarate_1/s_axi] \
+  [get_bd_intf_pins axi_interconnect_1/M24_AXI]
+connect_bd_net [get_bd_pins axi_interconnect_1/M25_ACLK] \
+  [get_bd_pins if_0/clk156_out]
+connect_bd_net [get_bd_pins axi_interconnect_1/M25_ARESETN] \
+  [get_bd_pins inverter_clk156_rst/Res]
+connect_bd_intf_net -boundary_type upper \
+  [get_bd_intf_pins nt_datarate_2/s_axi] \
+  [get_bd_intf_pins axi_interconnect_1/M25_AXI]
+connect_bd_net [get_bd_pins axi_interconnect_1/M26_ACLK] \
+  [get_bd_pins if_0/clk156_out]
+connect_bd_net [get_bd_pins axi_interconnect_1/M26_ARESETN] \
+  [get_bd_pins inverter_clk156_rst/Res]
+connect_bd_intf_net -boundary_type upper \
+  [get_bd_intf_pins nt_datarate_3/s_axi] \
+  [get_bd_intf_pins axi_interconnect_1/M26_AXI]
 
 # connect remaining network inferface pins
 connect_bd_net [get_bd_ports sfp_clk_n] [get_bd_pins if_0/refclk_n]

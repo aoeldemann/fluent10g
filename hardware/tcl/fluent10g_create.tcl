@@ -87,7 +87,7 @@ set_property -dict [list  CONFIG.NUM_SI {9} CONFIG.NUM_MI {2} \
 # create axi interconnect (ctrl)
 create_bd_cell -type ip -vlnv xilinx.com:ip:axi_interconnect:2.1 \
   axi_interconnect_1
-set_property -dict [list CONFIG.NUM_SI {1} CONFIG.NUM_MI {23}] \
+set_property -dict [list CONFIG.NUM_SI {1} CONFIG.NUM_MI {27}] \
   [get_bd_cells axi_interconnect_1]
 
 # instantiate network interface cores
@@ -198,6 +198,16 @@ create_bd_cell -type ip -vlnv TUMLIS:TUMLIS:nt_packet_counter:1.00 \
   nt_packet_counter_2
 create_bd_cell -type ip -vlnv TUMLIS:TUMLIS:nt_packet_counter:1.00 \
   nt_packet_counter_3
+
+# create data rate cores
+create_bd_cell -type ip -vlnv TUMLIS:TUMLIS:nt_datarate:1.00 \
+  nt_datarate_0
+create_bd_cell -type ip -vlnv TUMLIS:TUMLIS:nt_datarate:1.00 \
+  nt_datarate_1
+create_bd_cell -type ip -vlnv TUMLIS:TUMLIS:nt_datarate:1.00 \
+  nt_datarate_2
+create_bd_cell -type ip -vlnv TUMLIS:TUMLIS:nt_datarate:1.00 \
+  nt_datarate_3
 
 # create AXI4-Stream FIFOs for TX clock domain crossing
 create_bd_cell -type ip -vlnv xilinx.com:ip:axis_data_fifo:2.0 axis_fifo_tx_0
