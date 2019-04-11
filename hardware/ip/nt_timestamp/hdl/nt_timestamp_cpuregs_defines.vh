@@ -31,7 +31,7 @@
 `define CPUREG_CTRL_CYCLES_PER_TICK_ADDR      32'h00
 `define CPUREG_CTRL_CYCLES_PER_TICK_DEFAULT   8'b1
 
-`define CPUREG_CTRL_MODE_BITS                 0:0
+`define CPUREG_CTRL_MODE_BITS                 1:0
 `define CPUREG_CTRL_MODE_ADDR                 32'h04
 `define CPUREG_CTRL_MODE_DEFAULT              2'b0
 
