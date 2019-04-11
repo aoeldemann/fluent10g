@@ -125,6 +125,7 @@ module nt_recv_latency (
       3'h4: timestamp_fixed_pos16 = s_axis_tdata[32+:16];
       3'h5: timestamp_fixed_pos16 = s_axis_tdata[40+:16];
       3'h6: timestamp_fixed_pos16 = s_axis_tdata[48+:16];
+      default: timestamp_fixed_pos16 = 16'b0;
     endcase
   end
 
@@ -137,6 +138,7 @@ module nt_recv_latency (
       3'h3: timestamp_fixed_pos24 = s_axis_tdata[24+:24];
       3'h4: timestamp_fixed_pos24 = s_axis_tdata[32+:24];
       3'h5: timestamp_fixed_pos24 = s_axis_tdata[40+:24];
+      default: timestamp_fixed_pos24 = 24'b0;
     endcase
   end
 
