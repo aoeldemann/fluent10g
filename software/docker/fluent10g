@@ -32,57 +32,62 @@ function usage {
   echo "Usage: $0 build|run <source_files>"
 }
 
+# get command line arguments
+mode=$1
+shift
+sources=$@
+
 # operation mode specified?
-if [ -z "$1" ]; then
+if [ -z "$mode" ]; then
   usage
   exit -1
 fi
 
 # valid operation mode?
-if [ "$1" != "build" ] && [ "$1" != "run" ]; then
+if [ "$mode" != "build" ] && [ "$mode" != "run" ]; then
   usage
   exit -1
 fi
 
 
 # source files specified?
-if [ -z "$2" ]; then
+if [ -z "$sources" ]; then
   usage
   exit -1
 fi
 
-mode=$1
-shift
-sources=$@
-
-# loop over all source files
+# ensure that the source files are accessible in the mounted container volume
 numsources=${#sources[@]}
 let numsources=numsources-1
 for i in $(seq 0 $numsources); do
   spath=$(realpath ${sources[$i]})
+  cpath=$(realpath $PWD)
   # check if source file is in pwd
-  if [[ $spath != $PWD* ]]; then
+  if [[ $spath != $cpath* ]]; then
     echo "ERROR: source file not in current path"
     exit -1
   fi
   # strip off pwd
-  sources[$i]=${sources[$i]#$PWD/}
+  sources[$i]=${spath#$cpath/}
 done
 
-# make sure xdma driver is loaded
-if ! lsmod | grep "xdma" &> /dev/null; then
-  echo "ERROR: xdma driver is not loaded!"
-  exit -1
-fi
+# if we are in "run" mode, make sure the system is correctly set up
+if [ "$mode" == "run" ]; then
+  # make sure xdma driver is loaded
+  if ! lsmod | grep "xdma" &> /dev/null; then
+    echo "ERROR: xdma driver is not loaded!"
+    exit -1
+  fi
 
-# make sure xdma devices exist
-if [ ! -c "/dev/xdma0_c2h_0" ]; then
-  echo "ERROR: dma device '/dev/xdma0_c2h_0' does not exist!"
-  exit -1
-fi
-if [ ! -c "/dev/xdma0_h2c_0" ]; then
-  echo "ERROR: dma device '/dev/xdma0_h2c_0' does not exist!"
-  exit -1
+  # make sure xdma devices exist
+  if [ ! -c "/dev/xdma0_c2h_0" ]; then
+    echo "ERROR: dma device '/dev/xdma0_c2h_0' does not exist!"
+    exit -1
+  fi
+  if [ ! -c "/dev/xdma0_h2c_0" ]; then
+    echo "ERROR: dma device '/dev/xdma0_h2c_0' does not exist!"
+    exit -1
+  fi
 fi
 
 docker run -it --rm -v "$PWD":/fluent10g --privileged \
