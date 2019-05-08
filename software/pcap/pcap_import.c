@@ -37,6 +37,7 @@
 
 #define PCAP_MAGIC_NUMBER 0xa1b23c4d // nanosecond timestamp precision
 #define PCAP_MAX_PKT_SIZE 1518 // maximum packet size
+#define MAX_DATARATE 10e9 // maximum interface datarate
 #define CLK_FREQ 156.25e6 // clock frequency of the hardware replay logic
 
 /**
@@ -125,6 +126,20 @@ void pcap_pkt_handler(uint8_t *user_data_, const struct pcap_pkthdr *pkt_hdr,
     error("packet size exceeds configured maximum length");
   }
 
+  // each packet that is being written to the trace consists of meta data and
+  // the actual packet data. among the meta data is a timestamp, which controls
+  // when packets are sent out on the link. for each CURRENT packet, the
+  // timestamp in the meta data determins how many clock cycles shall pass until
+  // the NEXT packet shall be transmitted (i.e. it's a time difference). Thus,
+  // to assemble the meta data for packet 0 for example, we need to know when
+  // packet 1 shall be transmitted. Since this packet handler function cannot
+  // see the future packets, our calculation of timestamps is always based on
+  // the CURRENT and the PREVIOUS packet. The function calculates the timestamp
+  // and then writes the PREVIOUS packet and its assembled meta data to the
+  // trace.
+
+  // for n_pkts == 0, we have seen only one packet and cannot calculate any
+  // timestamps yet (see command above)
   if (user_data->n_pkts > 0) {
     // calculate inter-packet time in relation to previous packet
     struct timeval ts_diff;
@@ -235,8 +250,16 @@ int32_t main(int argc, char **argv) {
     error(pcap_geterr(f_pcap));
   }
 
-  // write the last packet to the trace file
-  write_packet(f_trace, 0, &user_data.pkt_hdr_prev, user_data.pkt_data_prev);
+  // write the last packet to the trace file (see comment in
+  // 'pcap_pkt_handler' function). It may happen that the network tester
+  // replays this trace multiple times without pauses. in this case, the
+  // timestamp of this packet determines how much time shall pass until the
+  // first packet of the trace is transmitted. unfortunately, in this corner-
+  // case we do not know the timestamp difference between the last packet of the
+  // trace and the first packet of the trace. we thus insert a short gap
+  // spanning the transmission time of a maximum sized packet at full datarate.
+  uint32_t ts_diff = (uint32_t)ceil(8.0*PCAP_MAX_PKT_SIZE/MAX_DATARATE*CLK_FREQ);
+  write_packet(f_trace, ts_diff, &user_data.pkt_hdr_prev, user_data.pkt_data_prev);
 
   // the total length of the output trace file must be 64 byte aligned. add
   // padding (all bits set to one) if necessary
