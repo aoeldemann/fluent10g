@@ -245,8 +245,7 @@ module nt_gen_replay_top # (
 
     .ctrl_start_i(cpureg_ctrl_start),
     .status_mem_read_active_i(mem_read_status_active),
-    .status_active_o(cpureg_status[1:1]),
-    .status_err_fifo_drain_o(cpureg_status[2:2])
+    .status_active_o(cpureg_status[1:1])
   );
 
 endmodule

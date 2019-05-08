@@ -87,18 +87,12 @@ def create_file():
             f.write(data)
             size += 8
 
-    # file size must be a multiple of 64 byte. if file size is not multiple
-    # of 64 bytes, we must append an 8 byte data word where all bits are
-    # set to one (this signals the end of trace data). if more 8 byte words
-    # need to be appended to reach 64 byte alignment, their value can be
-    # arbitrarily selected
-    if size % 64 != 0:
+    # data of each packet is aligned to 8 bytes. total file size must be
+    # aligned to 64 bytes. if padding data is required (i.e. zero or more 8
+    # byte data words), all bits of the padding data must be set to 1
+    while size % 64 != 0:
         f.write((2**64-1).to_bytes(8, byteorder='little'))
         size += 8
-
-    while size % 64 != 0:
-        f.write(b'\x00')
-        size += 1
 
     # close file
     f.close()

@@ -86,11 +86,9 @@ def check_output(dut, trace, axis_reader):
         if meta == 2**64-1:
             # the overall trace data has to be 512 bit aligned. If the actual
             # trace size is smaller, we can add padding at the end of the
-            # trace. To signal the end of the trace, the first 64 bits of
-            # padding data have to be set to all ones. Following these 64 bits,
-            # arbitrary padding data may follow to achieve the 512 bit
-            # alignment.
-            break
+            # trace (in multiples of 64 bit words). all bits of the padding
+            # data have to be set to 1
+            continue
 
         # extract meta data
         meta_delta_t = meta & 2**32-1
@@ -381,10 +379,6 @@ def nt_gen_replay_top_test(dut):
             if status & 0x3 != 0x0:
                 raise cocotb.result.TestFailure("module does not become " +
                                                 "inactive")
-
-            # check if there were errors
-            if status & 0x4:
-                raise cocotb.result.TestFailure("fifo draining failed")
 
             # clear the ring buffer contents
             ring_buff.clear()

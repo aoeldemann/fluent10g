@@ -50,13 +50,10 @@
 // The module starts operation as soon as the 'ctrl_start_i' input signal is
 // asserted. The input signal is expected to stay asserted for only a single
 // clock cycle. As long as the module is active, the 'status_active_o' output
-// signal is asserted. If an error occured while draining the FIFO, the
-// 'status_err_fifo_drain_o' output signal is asserted and the module quits
-// operation. In this case the module needs to be reset before operation can
-// be restarted. The input signal 'status_mem_read_active_i' is expected to
-// provide information on data is currently being read to the FIFO from the
-// DRAM memory. It is required to determine when all packets have been and
-// assembled.
+// signal is asserted. The input signal 'status_mem_read_active_i' is expected
+// to provide information on whether data is currently being read to the FIFO
+// from the DRAM memory. It is required to determine when all packets have been
+// assembled and transmitted.
 
 `timescale 1 ns / 1ps
 
@@ -83,17 +80,14 @@ module nt_gen_replay_assemble
   // control and status signals
   input wire          ctrl_start_i,
   input wire          status_mem_read_active_i,
-  output wire         status_active_o,
-  output wire         status_err_fifo_drain_o
+  output wire         status_active_o
 );
 
   parameter   IDLE            = 3'b000,
               START           = 3'b001,
               META            = 3'b010,
-              DONE_FIFO_DRAIN = 3'b011,
-              TX              = 3'b100,
-              WAIT            = 3'b101,
-              ERR_FIFO_DRAIN  = 3'b110;
+              TX              = 3'b011,
+              WAIT            = 3'b100;
 
   reg [2:0] state, nxt_state;
 
@@ -101,10 +95,6 @@ module nt_gen_replay_assemble
   reg [31:0] meta_delta_t, nxt_meta_delta_t;
   reg [10:0] meta_len_wire, nxt_meta_len_wire;
   reg [10:0] meta_len_snap, nxt_meta_len_snap;
-
-  // error flag if fifo draining at the end of replay failed
-  reg err_fifo_drain, nxt_err_fifo_drain;
-  assign status_err_fifo_drain_o = err_fifo_drain;
 
   // per-packet AXI4-Stream word counter
   reg [7:0] m_axis_word_cntr;
@@ -120,7 +110,7 @@ module nt_gen_replay_assemble
   assign tx_done_wire = ((m_axis_word_cntr + 1) << 3) >= meta_len_wire;
 
   // input FIFO read enable
-  assign fifo_rd_en_o = (state == META) | (state == DONE_FIFO_DRAIN) |
+  assign fifo_rd_en_o = (state == META) |
     ((state == TX) & ~tx_done_snap & m_axis_tready);
 
   // data is being transmitted when we are in the TX state. If less than
@@ -131,8 +121,8 @@ module nt_gen_replay_assemble
   assign do_tx =
     (state == TX) & (tx_done_snap | (~tx_done_snap & ~fifo_empty_i));
 
-  // module is active whenever not in idle or error state
-  assign status_active_o = (state != IDLE) & (state != ERR_FIFO_DRAIN);
+  // module is active whenever not in idle state
+  assign status_active_o = (state != IDLE);
 
   // control fsm
   always @(posedge clk) begin
@@ -145,8 +135,6 @@ module nt_gen_replay_assemble
     meta_delta_t <= nxt_meta_delta_t;
     meta_len_wire <= nxt_meta_len_wire;
     meta_len_snap <= nxt_meta_len_snap;
-
-    err_fifo_drain <= nxt_err_fifo_drain;
   end
 
   always @(*) begin
@@ -155,8 +143,6 @@ module nt_gen_replay_assemble
     nxt_meta_delta_t = meta_delta_t;
     nxt_meta_len_wire = meta_len_wire;
     nxt_meta_len_snap = meta_len_snap;
-
-    nxt_err_fifo_drain = 1'b0;
 
     case (state)
 
@@ -182,9 +168,8 @@ module nt_gen_replay_assemble
           nxt_state = IDLE;
         end else if (~fifo_empty_i) begin
           if (fifo_dout_i == 64'hFFFFFFFFFFFFFFFF) begin
-            // this meta word signals that the end of the trace has been
-            // reached. we will drain the fifo and then stop operation
-            nxt_state = DONE_FIFO_DRAIN;
+            // all bits of the meta data words are 1 -> this is padding data.
+            // ignore data, don't do anything, stay in this state
           end else begin
             // FIFO output conatins meta data
             nxt_meta_delta_t = fifo_dout_i[31:0];
@@ -197,30 +182,11 @@ module nt_gen_replay_assemble
         end
       end
 
-      DONE_FIFO_DRAIN: begin
-        if (status_mem_read_active_i) begin
-          // we are now working under the assumption that we are done
-          // replaying trace data. if the fifo is still being filled up with
-          // data from memory, something went wrong!
-          nxt_state = ERR_FIFO_DRAIN;
-        end else begin
-          if (fifo_empty_i) begin
-            // draining complete!
-            nxt_state = IDLE;
-          end
-        end
-      end
-
       TX: begin
         if (tx_done_wire & m_axis_tready) begin
           // packet transmission done! start over for next packet
           nxt_state = META;
         end
-      end
-
-      ERR_FIFO_DRAIN: begin
-        // flag error and do not leave this state until reset
-        nxt_err_fifo_drain = 1'b1;
       end
 
     endcase

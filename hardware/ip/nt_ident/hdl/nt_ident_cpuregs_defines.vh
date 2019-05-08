@@ -27,7 +27,7 @@
 //
 // AXI-Lite interface register widths, addresses and default values.
 
-`define FLUENT10G_VERSION 16'h000D
+`define FLUENT10G_VERSION 16'h000E
 `define FLUENT10G_CRC16   16'hF15E
 
 `define CPUREG_IDENT_BITS      31:0

@@ -58,5 +58,5 @@
 `define CPUREG_CTRL_START_ADDR                32'h1C
 `define CPUREG_CTRL_START_DEFAULT             1'b0
 
-`define CPUREG_STATUS_BITS                    2:0
+`define CPUREG_STATUS_BITS                    1:0
 `define CPUREG_STATUS_ADDR                    32'h20
