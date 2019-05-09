@@ -22,6 +22,10 @@ per-packet basis.
 The documentation can be found at <https://fluent10g.readthedocs.io>. Although
 it is still in its early stages, we are continuously extending it.
 
+#### Are there usage examples?
+
+Yep! Please have a look in the ``examples`` folder of this repository.
+
 #### What replay/capture throughput does FlueNT10G achieve?
 
 FlueNT10G can concurrently replay and capture network traffic on three 10 Gbps
