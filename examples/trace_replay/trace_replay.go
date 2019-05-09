@@ -44,9 +44,6 @@ var interfaces = []int{0, 1, 2, 3}
 var fnameTrace = "trace.trace"
 
 func main() {
-	// set log level to INFO to reduce verbosity of output
-	gofluent10g.LogSetLevel(gofluent10g.LOG_INFO)
-
 	// open fluent10g network tester
 	nt := gofluent10g.NetworkTesterCreate()
 	defer nt.Close()
