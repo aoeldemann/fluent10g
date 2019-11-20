@@ -1,3 +1,6 @@
 [submodule "hardware/cocotb"]
 	path = hardware/cocotb
 	url = https://github.com/aoeldemann/cocotb.git
+[submodule "software/gofluent10g"]
+	path = software/gofluent10g
+	url = https://github.com/aoeldemann/gofluent10g.git
