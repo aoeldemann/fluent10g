@@ -8,17 +8,21 @@ Installation
 Cloning the Repositories
 ========================
 
-FlueNT10’s source code is located in two Git repositories named *fluent10g* and
-*gofluent10g*. While the latter only contains the Golang library for programming
-FlueNT10G measurement applications, the first repository contains the hardware
-code base and all other components.
-
-Clone both repositories to your local machine:
+To clone the Git repository containing the hard- and software implementation of
+FlueNT10G to the working directory defined by the environment variable set in
+the :ref:`preparation` steps, execute the following commands:
 
 .. code-block:: bash
 
-  git clone https://github.com/aoeldemann/fluent10g.git $FLUENT10G/core
-  git clone https://github.com/aoeldemann/gofluent10g.git $FLUENT10G/sw
+  git clone https://github.com/aoeldemann/fluent10g.git $FLUENT10G
+  cd $FLUENT10G
+  git submodule init
+  git submodule update
+
+The *Golang* library containing the software source code is located in a
+separate repository, which is included in the main repository as a Git
+submodule. The last two commands initialize this submodule repository and fetch
+the contents from GitHub.
 
 Hardware
 ========
@@ -33,7 +37,7 @@ following command:
 
 .. code-block:: bash
 
-  make -C $FLUENT10G/core/ hw
+  make -C $FLUENT10G hw
 
 Synthesis and implementation will take a while, so please be patient! :-)
 
@@ -46,11 +50,11 @@ First start a Xilinx Hardware Server:
 
   hw_server
 
-Open a new terminal and programm the FPGA:
+Open a new terminal and program the FPGA:
 
 .. code-block:: bash
 
-  FPGA_HOST=localhost make -C $FLUENT10G/core/ program
+  FPGA_HOST=localhost make -C $FLUENT10G program
 
 .. note:: The `FPGA_HOST` environment variable value specified when running
   the `make` command determines the hostname of the machine running the Xilinx
@@ -66,6 +70,3 @@ reenumeration may be sufficient, however it did not work for our host system).
 
 Software
 ========
-
-.. _NetFPGA-SUME: https://netfpga.org
-.. _list of motherboards: https://github.com/NetFPGA/NetFPGA-SUME-public/wiki/Motherboard-Information
