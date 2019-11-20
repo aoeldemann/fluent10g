@@ -39,7 +39,9 @@ following command:
 
   make -C $FLUENT10G hw
 
-Synthesis and implementation will take a while, so please be patient! :-)
+Synthesis and implementation will take a while, so please be patient! :-) If
+everything goes well, the bistream file should be located at
+`$FLUENT10G/hardware/project/fluent10g.runs/impl_1/fluent10g_wrapper.bit`.
 
 Programming the FPGA
 --------------------
@@ -60,6 +62,10 @@ Open a new terminal and program the FPGA:
   the `make` command determines the hostname of the machine running the Xilinx
   Hardware Server. Change the value if the FPGA that shall be programmed is
   plugged into a remote machine.
+
+.. note:: Alternatively, the FPGA can be programmed using the hardware manager
+  of the Xilinx Vivado GUI. To do so, open the generated project file located at
+  `$FLUENT10G/hardware/project/fluent10g.xpr` in Vivado.
 
 Finally, reboot the machine containing the FPGA board (PCI Express device
 reenumeration may be sufficient, however it did not work for our host system).
