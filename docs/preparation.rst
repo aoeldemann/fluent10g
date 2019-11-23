@@ -27,12 +27,18 @@ install the following dependency packages before continuing:
 
 Environment Variables
 ---------------------
+
+The following sections describe how to set the `FLUENT10G` and `GOPATH`
+environment variables.
+
+FLUENT10G
+~~~~~~~~~
 To make things easy, we choose a working directory for FlueNT10G and set up
 an environment variable pointing to it. In this documentation, our working
 directory is `~/fluent10g`, but feel free to adjust. After creating the
 directory, we set up `$FLUENT10G` to point to the working directory. Updating
-the `.bashrc` will make that configuration persistent. If you are different
-shell, please update the commands accordingly.
+the `.bashrc` will make that configuration persistent. If you are using a
+different shell, please update the commands accordingly.
 
 .. code-block:: bash
 
@@ -41,14 +47,15 @@ shell, please update the commands accordingly.
     source ~/.bashrc
 
 GOPATH
-------
+~~~~~~
 The measurement applications, which control the behavior of the FlueNT10G
 network tester, are written in *Go*. When working with Go, we must set the
 `GOPATH` environment variable to point to the directory holding the source code
 and binary files of all Go projects. In this documentation, we set the `GOPATH`
 to `~/go` (which is actually the default value). Feel free to use any other
 path. You can find more information on the `GOPATH` environment variable
-`here`__.
+`here`__. Again, if you are not using a bash, please update the commands
+accordingly.
 
 .. code-block:: bash
 
