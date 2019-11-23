@@ -92,6 +92,7 @@ by other Go applications:
 Then, change into the package's directory and install its dependencies:
 
 .. code-block:: bash
+
     cd $GOPATH/src/github.com/aoeldemann/gofluent10g
     go get
 
