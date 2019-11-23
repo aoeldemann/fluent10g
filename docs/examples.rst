@@ -2,6 +2,9 @@
 Examples
 ########
 
+Currently, there is no API documentation ready yet.
+Please have a look at the following three example measurement applications, which should give you a solid idea on how FlueNT10G can be used:
+
 Trace Replay
 ------------
 
@@ -12,8 +15,8 @@ This example measurement application replays a constant-bit-rate network trace (
 .. _Replay: https://github.com/aoeldemann/fluent10g/tree/master/examples/trace_replay
 __ Replay_
 
-Trace Capture
--------------
+Packet Capture
+--------------
 
 `Source Code`__
 
