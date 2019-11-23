@@ -40,6 +40,22 @@ shell, please update the commands accordingly.
     echo "export FLUENT10G=~/fluent10g" >> ~/.bashrc
     source ~/.bashrc
 
+GOPATH
+------
+The measurement applications, which control the behavior of the FlueNT10G
+network tester, are written in **Go**. When working with Go, we must set the
+`GOPATH` environment variable to point to the directory holding the source code
+and binary files of all Go projects. In this documentation, we set the `GOPATH`
+to `~/go` (which is actually the default value). Feel free to use any other
+path. You can find more information on the `GOPATH` environment variable
+`here`__.
+
+.. code-block:: bash
+
+    mkdir ~/go
+    echo "export GOPATH=~/go" >> ~/.bashrc
+    source ~/.bashrc
+
 Xilinx Vivado
 -------------
 To generate the FPGA bitstream, please install Xilinx Vivado 2018.3. Please
@@ -101,3 +117,5 @@ follow the instructions below to compile and set up the library:
 .. _Xilinx PCI Express DMA driver:
     https://github.com/Xilinx/dma_ip_drivers/tree/master/XDMA/linux-kernel
 .. _ZeroMQ: http://zeromq.org
+.. _GoPATH: https://github.com/golang/go/wiki/GOPATH
+__ GOPATH
