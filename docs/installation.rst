@@ -56,7 +56,7 @@ Open a new terminal and program the FPGA:
 
 .. code-block:: bash
 
-  FPGA_HOST=localhost make -C $FLUENT10G program
+  FPGA_HOST=localhost make -C $FLUENT10G/hardware program
 
 .. note:: The `FPGA_HOST` environment variable value specified when running
   the `make` command determines the hostname of the machine running the Xilinx
