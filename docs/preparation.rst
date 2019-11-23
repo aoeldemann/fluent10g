@@ -49,31 +49,29 @@ purchase/donation required), otherwise you will encounter problems during
 Xilinx PCIe DMA driver
 ----------------------
 FlueNT10G depends on the `Xilinx PCI Express DMA driver`_ for data transfers
-between host system and the FPGA. We first create a directory for the driver
-and download the zip archive containing the driver files from Xilinx:
+between host system and the FPGA. We first clone the repository (containing
+different kinds of DMA drivers), which is maintained by Xilinx:
 
 .. code-block:: bash
 
-    mkdir $FLUENT10G/xdma-drv
-    cd $FLUENT10G/xdma-drv
-    wget https://www.xilinx.com/Attachment/Xilinx_Answer_65444_Linux_Files_rel20180420.zip
-    unzip Xilinx_Answer_65444_Linux_Files_rel20180420.zip
+    cd $FLUENT10G
+    git clone https://github.com/Xilinx/dma_ip_drivers
 
-Compile and install the driver:
+Compile and install the driver (we need the XDMA driver):
 
 .. code-block:: bash
 
-    cd Xilinx_Answer_65444_Linux_Files_rel20180420/xdma/
+    cd dma_ip_drivers/XDMA/linux-kernel/xdma/
     sudo make install
     sudo depmod
 
 Load the driver and configure the system to automatically load the driver after
-reboot:
+reboot (poll mode is enabled to increase transfer performance):
 
 .. code-block:: bash
 
-    sudo modprobe xdma
-    sudo sh -c "echo 'xdma' >> /etc/modules"
+    sudo modprobe xdma poll_mode=1
+    sudo sh -c "echo 'options xdma poll_mode=1' >> /etc/modprobe.d/xdma.conf"
 
 ZeroMQ (optional)
 -----------------
@@ -101,5 +99,5 @@ follow the instructions below to compile and set up the library:
 .. _Xilinx 10G Ethernet MAC:
     https://www.xilinx.com/products/intellectual-property/do-di-10gemac.html
 .. _Xilinx PCI Express DMA driver:
-    https://www.xilinx.com/support/answers/65444.html
+    https://github.com/Xilinx/dma_ip_drivers/tree/master/XDMA/linux-kernel
 .. _ZeroMQ: http://zeromq.org
