@@ -18,5 +18,6 @@ as fast as possible and have you perform your measurements in no time.
     gettingstarted
     preparation
     installation
+    examples
 
 .. _NetFPGA-SUME: https://netfpga.org
