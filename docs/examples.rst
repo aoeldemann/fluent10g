@@ -9,8 +9,8 @@ Trace Replay
 
 This example measurement application replays a constant-bit-rate network trace (10 Gbps, 64 bytes packets) on all four interfaces of the network tester simultaneously.
 
-.. _Trace Replay: https://github.com/aoeldemann/fluent10g/tree/master/examples/trace_replay
-__ Trace Replay_
+.. _Replay: https://github.com/aoeldemann/fluent10g/tree/master/examples/trace_replay
+__ Replay_
 
 Trace Capture
 -------------
@@ -21,8 +21,8 @@ This measurement application captures arriving network traffic on all four netwo
 It then writes the recorded data into four separate output network traces and prints out the number of packets captured on each interface.
 Each packet is accurately timestamped upon reception at the network interface, the resulting PCAP trace contains nanosecond resolution timestamps.
 
-.. _Trace Capture: https://github.com/aoeldemann/fluent10g/tree/master/examples/packet_capture
-__ Trace Capture_
+.. _Capture: https://github.com/aoeldemann/fluent10g/tree/master/examples/packet_capture
+__ Capture_
 
 Latency Measurements
 --------------------
