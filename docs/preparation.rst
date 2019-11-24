@@ -54,7 +54,7 @@ network tester, are written in *Go*. When working with Go, we must set the
 and binary files of all Go projects. In this documentation, we set the `GOPATH`
 to `~/go` (which is actually the default value). Feel free to use any other
 path. You can find more information on the `GOPATH` environment variable
-`here`__. Again, if you are not using a bash, please update the commands
+`here`__. Again, if you are not using bash, please update the commands
 accordingly.
 
 .. code-block:: bash
@@ -68,6 +68,7 @@ Xilinx Vivado
 To generate the FPGA bitstream, please install Xilinx Vivado 2018.3. Please
 ensure that a `Xilinx 10G Ethernet MAC`_ license is installed (separate
 purchase/donation required), otherwise you will encounter problems during
+synthesis/implementation.
 
 Xilinx PCIe DMA driver
 ----------------------

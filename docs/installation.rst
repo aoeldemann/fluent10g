@@ -27,6 +27,8 @@ the contents from GitHub.
 Hardware
 ========
 
+Moving on to the hardware ...
+
 FPGA Bitstream Generation
 -------------------------
 
