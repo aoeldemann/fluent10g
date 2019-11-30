@@ -81,7 +81,7 @@ create_bd_cell -type ip -vlnv xilinx.com:ip:axi_interconnect:2.1 \
   axi_interconnect_0
 set_property -dict [list  CONFIG.NUM_SI {9} CONFIG.NUM_MI {2} \
                           CONFIG.ENABLE_ADVANCED_OPTIONS {1} \
-                          CONFIG.XBAR_DATA_WIDTH {512} CONFIG.STRATEGY {2}] \
+                          CONFIG.XBAR_DATA_WIDTH {512}] \
   [get_bd_cells axi_interconnect_0]
 
 # create axi interconnect (ctrl)
