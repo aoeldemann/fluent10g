@@ -34,6 +34,9 @@ set proj_dir ./project
 # open project
 open_project ./${proj_dir}/${design}.xpr
 
+# set strategy to 'Performance_Explore'
+set_property strategy Performance_Explore [get_runs impl_1]
+
 # run implementation and generate bitstream
 launch_runs impl_1 -to_step write_bitstream
 wait_on_run impl_1
