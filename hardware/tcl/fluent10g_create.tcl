@@ -213,37 +213,37 @@ create_bd_cell -type ip -vlnv TUMLIS:TUMLIS:nt_datarate:1.00 \
 create_bd_cell -type ip -vlnv xilinx.com:ip:axis_data_fifo:2.0 axis_fifo_tx_0
 set_property -dict [list CONFIG.TDATA_NUM_BYTES {8} CONFIG.IS_ACLK_ASYNC {1} \
   CONFIG.HAS_TKEEP {1} CONFIG.HAS_TLAST {1} CONFIG.TUSER_WIDTH {32} \
-  CONFIG.FIFO_DEPTH {16}]  [get_bd_cells axis_fifo_tx_0]
+  CONFIG.FIFO_DEPTH {256} CONFIG.FIFO_MODE {2}] [get_bd_cells axis_fifo_tx_0]
 create_bd_cell -type ip -vlnv xilinx.com:ip:axis_data_fifo:2.0 axis_fifo_tx_1
 set_property -dict [list CONFIG.TDATA_NUM_BYTES {8} CONFIG.IS_ACLK_ASYNC {1} \
   CONFIG.HAS_TKEEP {1} CONFIG.HAS_TLAST {1} CONFIG.TUSER_WIDTH {32} \
-  CONFIG.FIFO_DEPTH {16}] [get_bd_cells axis_fifo_tx_1]
+  CONFIG.FIFO_DEPTH {256} CONFIG.FIFO_MODE {2}] [get_bd_cells axis_fifo_tx_1]
 create_bd_cell -type ip -vlnv xilinx.com:ip:axis_data_fifo:2.0 axis_fifo_tx_2
 set_property -dict [list CONFIG.TDATA_NUM_BYTES {8} CONFIG.IS_ACLK_ASYNC {1} \
   CONFIG.HAS_TKEEP {1} CONFIG.HAS_TLAST {1} CONFIG.TUSER_WIDTH {32} \
-  CONFIG.FIFO_DEPTH {16}] [get_bd_cells axis_fifo_tx_2]
+  CONFIG.FIFO_DEPTH {256} CONFIG.FIFO_MODE {2}] [get_bd_cells axis_fifo_tx_2]
 create_bd_cell -type ip -vlnv xilinx.com:ip:axis_data_fifo:2.0 axis_fifo_tx_3
 set_property -dict [list CONFIG.TDATA_NUM_BYTES {8} CONFIG.IS_ACLK_ASYNC {1} \
   CONFIG.HAS_TKEEP {1} CONFIG.HAS_TLAST {1} CONFIG.TUSER_WIDTH {32} \
-  CONFIG.FIFO_DEPTH {16}] [get_bd_cells axis_fifo_tx_3]
+  CONFIG.FIFO_DEPTH {256} CONFIG.FIFO_MODE {2}] [get_bd_cells axis_fifo_tx_3]
 
 # create AXI4-Stream FIFOs for RX clock domain crossing
 create_bd_cell -type ip -vlnv xilinx.com:ip:axis_data_fifo:2.0 axis_fifo_rx_0
 set_property -dict [list CONFIG.TDATA_NUM_BYTES {8} CONFIG.IS_ACLK_ASYNC {1} \
   CONFIG.HAS_TKEEP {1} CONFIG.HAS_TLAST {1} CONFIG.TUSER_WIDTH {53} \
-  CONFIG.FIFO_DEPTH {256} CONFIG.FIFO_MODE {2}] [get_bd_cells axis_fifo_rx_0]
+  CONFIG.FIFO_DEPTH {16}] [get_bd_cells axis_fifo_rx_0]
 create_bd_cell -type ip -vlnv xilinx.com:ip:axis_data_fifo:2.0 axis_fifo_rx_1
 set_property -dict [list CONFIG.TDATA_NUM_BYTES {8} CONFIG.IS_ACLK_ASYNC {1} \
   CONFIG.HAS_TKEEP {1} CONFIG.HAS_TLAST {1} CONFIG.TUSER_WIDTH {53} \
-  CONFIG.FIFO_DEPTH {256} CONFIG.FIFO_MODE {2}] [get_bd_cells axis_fifo_rx_1]
+  CONFIG.FIFO_DEPTH {16}] [get_bd_cells axis_fifo_rx_1]
 create_bd_cell -type ip -vlnv xilinx.com:ip:axis_data_fifo:2.0 axis_fifo_rx_2
 set_property -dict [list CONFIG.TDATA_NUM_BYTES {8} CONFIG.IS_ACLK_ASYNC {1} \
   CONFIG.HAS_TKEEP {1} CONFIG.HAS_TLAST {1} CONFIG.TUSER_WIDTH {53} \
-  CONFIG.FIFO_DEPTH {256} CONFIG.FIFO_MODE {2}] [get_bd_cells axis_fifo_rx_2]
+  CONFIG.FIFO_DEPTH {16}] [get_bd_cells axis_fifo_rx_2]
 create_bd_cell -type ip -vlnv xilinx.com:ip:axis_data_fifo:2.0 axis_fifo_rx_3
 set_property -dict [list CONFIG.TDATA_NUM_BYTES {8} CONFIG.IS_ACLK_ASYNC {1} \
   CONFIG.HAS_TKEEP {1} CONFIG.HAS_TLAST {1} CONFIG.TUSER_WIDTH {53} \
-  CONFIG.FIFO_DEPTH {256} CONFIG.FIFO_MODE {2}] [get_bd_cells axis_fifo_rx_3]
+  CONFIG.FIFO_DEPTH {16}] [get_bd_cells axis_fifo_rx_3]
 
 # create MIGs for DDD3 DRAM memories
 create_bd_cell -type ip -vlnv xilinx.com:ip:mig_7series:4.2 mig_ddr3A
